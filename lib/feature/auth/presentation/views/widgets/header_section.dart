@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:save_plant/core/constants/app_colors.dart';
-import 'package:save_plant/core/constants/app_strings.dart';
+import 'package:save_plant/core/theme/text_style.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key, required this.title});
@@ -10,7 +9,6 @@ class HeaderSection extends StatelessWidget {
     return Row(
        mainAxisAlignment :MainAxisAlignment.center,
       children: [
-       
         Image.asset(
           'assets/images/logo.png',
           fit: BoxFit.fill,
@@ -19,9 +17,7 @@ class HeaderSection extends StatelessWidget {
         Text(
           title,
           style: 
-          AppString.gilorybold24.copyWith(
-            color: AppColor.primaryColor,
-          ),
+          AppTextStyle.giloryBold24(context)
           ),
       ],
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:save_plant/core/constants/app_strings.dart';
+import 'package:save_plant/core/theme/text_style.dart';
 
 class TilteDescription extends StatelessWidget {
    TilteDescription({super.key,required this.title});
@@ -10,7 +10,7 @@ String title;
       alignment: Alignment.centerLeft, 
       child: Text(
         title,
-        style: AppString.google_fonts_roboto16,
+        style: AppTextStyle.roboto16(context),
       ));
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:save_plant/core/constants/app_strings.dart';
-import 'package:save_plant/core/helper/custom_button.dart';
+import 'package:save_plant/core/theme/text_style.dart';
+import 'package:save_plant/core/widgets/custom_button.dart';
+import 'package:save_plant/feature/auth/presentation/views/signin_view.dart';
 import 'package:save_plant/feature/onboarding/presentation/views/widgets/onboarding_content.dart';
 import 'package:save_plant/feature/onboarding/presentation/views/widgets/onboarding_indicator.dart';
 
@@ -18,22 +18,22 @@ class _OnboardingViewbodyState extends State<OnboardingViewbody> {
 
   List<Map<String, String>> pages = [
     {
-      "image": "assets/images/logo1.png",
+      "image": "assets/images/intro1.png",
       "title": "Scan Your Plants",
       "desc":
-          "Simply take a photo of your plant's leaves or stems.\nOur advanced camera technology captures every\ndetail needed for accurate diagnosis."
+          "Simply take a photo of your plant's leaves or stems.Our advanced camera technology captures every\ndetail needed for accurate diagnosis."
     },
     {
-      "image": "assets/images/logo2.png",
+      "image": "assets/images/intro2.png",
       "title": "AI-Powered Analysis",
       "desc":
-          "Our cutting-edge artificial intelligence analyzes your\nplant instantly, identifying diseases with high\naccuracy and providing detailed insights."
+          "Our cutting-edge artificial intelligence analyzes your plant instantly, identifying diseases with high accuracy and providing detailed insights."
     },
     {
-      "image": "assets/images/logo3.png",
+      "image": "assets/images/intro3.png",
       "title": "Track & Protect",
       "desc":
-          "Get personalized treatment recommendations, track\nyour plant's health over time, and join a community\nof plant enthusiasts."
+          "Get personalized treatment recommendations, track your plant's health over time, and join a community of plant enthusiasts."
     },
   ];
   void nextPage() {
@@ -43,7 +43,7 @@ class _OnboardingViewbodyState extends State<OnboardingViewbody> {
         curve: Curves.easeInOut,
       );
     } else {
-      (context).push('/signin');
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>SigninView()));
     }
   }
   @override
@@ -56,10 +56,13 @@ class _OnboardingViewbodyState extends State<OnboardingViewbody> {
             child: Align(
               alignment: Alignment.topRight,
               child: InkWell(
-                onTap: (){(context).push('/signin');},
+                onTap: (){Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => SigninView()),
+); },
                 child: Text(
                   "Skip",
-                  style: AppString.giloryRegular18,
+                  style: AppTextStyle.giloryRegular16(context),
                 ),
               ),
             ),

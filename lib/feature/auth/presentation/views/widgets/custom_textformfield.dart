@@ -36,48 +36,61 @@ class _CustomTextformfieldState extends State<CustomTextformfield> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Material(
-      elevation: 2,
-      borderRadius: BorderRadius.circular(10),
-      child: TextFormField(
-        keyboardType:widget.keyboardType,
-        controller: widget.controller,
-        validator: widget.validator,
-        obscureText: _obscureText,
-        cursorColor: AppColor.primaryColor,
-        decoration: InputDecoration(
-          hintText: widget.hintText,
-          filled: true,
-          fillColor:AppColor.secondaryColor,
-          hintStyle: const TextStyle(color:AppColor.blackColor),
-          enabledBorder: OutlineInputBorder(
-          
-            borderSide: BorderSide.none,
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Colors.grey, width: 2),
-          ),
-          prefixIcon: Icon(widget.prefixIcon),
-          suffixIcon: widget.suffixIcon != null
-              ? IconButton(
-                  icon: Icon(
-                    _obscureText ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _obscureText = !_obscureText;
-                    });
-                  },
-                )
-              : null,
-        ),
+ @override
+Widget build(BuildContext context) {
+  final theme = Theme.of(context);
+
+  return Material(
+    color: theme.colorScheme.surface,
+    elevation: 2,
+    borderRadius: BorderRadius.circular(10),
+    child: TextFormField(
+      keyboardType: widget.keyboardType,
+      controller: widget.controller,
+      validator: widget.validator,
+      obscureText: _obscureText,
+      cursorColor: theme.colorScheme.primary,
+      style: TextStyle(
+        color: theme.colorScheme.onSurface,
       ),
-    );
-  }
-}
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        filled: true,
+        fillColor: theme.colorScheme.surface,
+        hintStyle: TextStyle(
+          color: theme.colorScheme.onSurface.withOpacity(0.5),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: theme.colorScheme.primary,
+            width: 2,
+          ),
+        ),
+        prefixIcon: Icon(
+          widget.prefixIcon,
+          color: theme.colorScheme.onSurface,
+        ),
+        suffixIcon: widget.suffixIcon != null
+            ? IconButton(
+                icon: Icon(
+                  _obscureText
+                      ? CupertinoIcons.eye_slash
+                      : CupertinoIcons.eye,
+                  color: theme.colorScheme.onSurface,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+              )
+            : null,
+      ),
+    ),
+  );
+}}

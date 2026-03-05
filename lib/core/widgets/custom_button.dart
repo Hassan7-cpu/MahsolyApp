@@ -23,14 +23,14 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           gradient: LinearGradient(
-            colors: [AppColor.primaryColor,AppColor.seecondryColor ],
+            colors: [AppColor.primaryColor,AppColor.secondryColor ],
           ),
         ),
         child: Center(
           child: Text(
             buttonText,
             style: TextStyle(
-              color: AppColor.whiteColor,
+              color: AppColor.lightBackground,
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
