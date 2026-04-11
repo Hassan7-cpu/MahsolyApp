@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/functions/validators.dart';
@@ -67,12 +68,12 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20.r),
         child: Form(
           key: _formKey,
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: 30.h),
               CustomTextformfield(
                 hintText: "Current Password",
                 controller: currentPasswordController,
@@ -88,7 +89,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                 },
               ),
 
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
 
               /// New Password
               CustomTextformfield(
@@ -101,7 +102,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                 validator: Validators.passwordValidator,
               ),
 
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
 
               /// Confirm Password
               CustomTextformfield(
@@ -114,7 +115,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                 validator: Validators.passwordValidator,
               ),
 
-              const SizedBox(height: 35),
+              SizedBox(height: 35.h),
 
               /// Updated Button
               CustomButtonAuth(

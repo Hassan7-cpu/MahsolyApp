@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,8 +28,8 @@ class _ProfileHeaderCardState extends State<ProfileHeaderCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
-         decoration: AppDecoration.card(context),
+      padding: EdgeInsets.all(16.r),
+      decoration: AppDecoration.card(context),
       child: Row(
         children: [
           Stack(
@@ -37,34 +38,34 @@ class _ProfileHeaderCardState extends State<ProfileHeaderCard> {
               CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.grey.shade200,
-                child: const Icon(Icons.person, size: 50, color: Colors.grey),
+                child: Icon(Icons.person, size: 50.sp, color: Colors.grey),
               ),
               GestureDetector(
                 onTap: _pickImage,
                 child: Container(
-                  padding: const EdgeInsets.all(6),
+                  padding: EdgeInsets.all(6.r),
                   decoration: const BoxDecoration(
                     color: Colors.green,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.camera_alt,
-                    size: 25,
+                    size: 25.sp,
                     color: Colors.white,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(width: 16),
-          const Column(
+          SizedBox(width: 16.w),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Hassan",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 4),
+              SizedBox(height: 4.h),
               Text(
                 "hassan@gmail.com",
                 style: TextStyle(

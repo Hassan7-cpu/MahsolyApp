@@ -5,16 +5,18 @@ import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/theme/app_theme.dart';
 import 'package:save_plant/core/theme/cubit/theme_cubit.dart';
 import 'package:save_plant/core/theme/cubit/theme_state.dart';
-import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
+import 'package:save_plant/feature/onboarding/onboarding_view.dart';
+import 'package:save_plant/feature/soil_input/presentation/view/soil_input_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper().init();
-  runApp(const MyApp());
+  runApp(const Mahsoly());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Mahsoly extends StatelessWidget {
+  const Mahsoly({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -25,14 +27,13 @@ class MyApp extends StatelessWidget {
             designSize: const Size(360, 690),
             minTextAdapt: true,
             splitScreenMode: true,
-            // Use builder only if you need to use library outside ScreenUtilInit context
             builder: (_, child) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: state.themeMode,
-                home: PhotoTipsView(),
+                home: SoilInputView(),
               );
             },
           );

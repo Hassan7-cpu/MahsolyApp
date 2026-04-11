@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/app_setting_card.dart';
@@ -11,18 +12,22 @@ class ProfileViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+      physics: BouncingScrollPhysics(),
+      padding: EdgeInsets.all(16.r),
+      child: SafeArea(
+        bottom: true,
         child: Column(
           children: [
-            const ProfileHeaderCard(),
-            const SizedBox(height: 16),
+            ProfileHeaderCard(),
+            SizedBox(height: 16.h),
             PersonalInfoCard(),
-            const SizedBox(height: 16),
-            const SecurityCard(),
-            const SizedBox(height: 16),
-            const AppSettingsCard(),
+            SizedBox(height: 16.h),
+            SecurityCard(),
+            SizedBox(height: 16.h),
+            AppSettingsCard(),
           ],
         ),
+      ),
     );
   }
 }

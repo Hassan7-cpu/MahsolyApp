@@ -1,8 +1,9 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/constants/app_assets.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/widgets/custom_button.dart';
-import 'package:save_plant/feature/auth/presentation/views/signin_view.dart';
+import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
 import 'package:save_plant/feature/onboarding/presentation/views/widgets/onboarding_content.dart';
 import 'package:save_plant/feature/onboarding/presentation/views/widgets/onboarding_indicator.dart';
 
@@ -57,7 +58,7 @@ class _OnboardingViewbodyState extends State<OnboardingViewbody> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Align(
               alignment: Alignment.topRight,
               child: InkWell(
@@ -74,7 +75,7 @@ class _OnboardingViewbodyState extends State<OnboardingViewbody> {
               ),
             ),
           ),
-          SizedBox(height: 50),
+          SizedBox(height: 50.h),
           Expanded(
             child: PageView.builder(
               controller: _controller,
@@ -94,7 +95,7 @@ class _OnboardingViewbodyState extends State<OnboardingViewbody> {
             ),
           ),
           OnboardingIndicator(pages: pages, currentIndex: currentIndex),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           CustomButton(
             width: MediaQuery.of(context).size.width * 0.65,
             buttonText: currentIndex == pages.length - 1
@@ -102,7 +103,7 @@ class _OnboardingViewbodyState extends State<OnboardingViewbody> {
                 : 'Next',
             onPressed: nextPage,
           ),
-          SizedBox(height: 50),
+          SizedBox(height: 50.h),
         ],
       ),
     );

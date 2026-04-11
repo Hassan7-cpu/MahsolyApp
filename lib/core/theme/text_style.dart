@@ -7,7 +7,7 @@ class AppTextStyle {
     return GoogleFonts.roboto(
       fontSize: 16.sp,
       fontWeight: FontWeight.w400,
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -15,7 +15,7 @@ class AppTextStyle {
     return GoogleFonts.roboto(
       fontSize: 18.sp,
       fontWeight: FontWeight.w600,
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -24,7 +24,7 @@ class AppTextStyle {
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
       fontFamily: 'Gilory',
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -33,7 +33,7 @@ class AppTextStyle {
       fontSize: 16.sp,
       fontWeight: FontWeight.w400,
       fontFamily: 'Gilory',
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -42,7 +42,7 @@ class AppTextStyle {
       fontSize: 18.sp,
       fontWeight: FontWeight.w400,
       fontFamily: 'Gilory',
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -51,7 +51,7 @@ class AppTextStyle {
       fontSize: 18.sp,
       fontWeight: FontWeight.bold,
       fontFamily: 'Gilory',
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -60,7 +60,7 @@ class AppTextStyle {
       fontSize: 22.sp,
       fontWeight: FontWeight.bold,
       fontFamily: 'Gilory',
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -69,7 +69,7 @@ class AppTextStyle {
       fontSize: 24.sp,
       fontWeight: FontWeight.bold,
       fontFamily: 'Gilory',
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 
@@ -78,7 +78,7 @@ class AppTextStyle {
       fontSize: 30.sp,
       fontWeight: FontWeight.bold,
       fontFamily: 'Gilory',
-      color: Theme.of(context).colorScheme.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 }

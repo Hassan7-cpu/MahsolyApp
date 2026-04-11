@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 
@@ -16,9 +17,9 @@ class BuildIconTextRow extends StatelessWidget {
         Icon(
           iconColor == Colors.green ? Icons.check_circle : Icons.cancel,
           color: iconColor,
-          size: 18,
+          size: 18.sp,
         ),
-        const SizedBox(width: 6),
+        SizedBox(width: 6.w),
         Expanded(
           child: Text(text, style: AppTextStyle.giloryRegular16(context)),
         ),

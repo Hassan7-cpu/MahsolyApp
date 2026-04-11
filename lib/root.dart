@@ -5,6 +5,7 @@ import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/feature/auth/presentation/views/profile_view.dart';
 import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
 import 'package:save_plant/feature/home/presentation/views/home_view.dart';
+import 'package:save_plant/feature/soil_input/presentation/view/soil_input_view.dart';
 
 class Root extends StatefulWidget {
   const Root({super.key});
@@ -24,7 +25,7 @@ class _RootState extends State<Root> {
     super.initState();
     pageController = PageController(initialPage: currentPage);
 
-    pages = [HomeView(), PhotoTipsView(), ProfileView()];
+    pages = [HomeView(), PhotoTipsView(), SoilInputView(), ProfileView()];
   }
 
   @override
@@ -63,17 +64,21 @@ class _RootState extends State<Root> {
             child: Icon(CupertinoIcons.photo_camera),
             label: 'Camera',
           ),
+          GlazeNavBarItem(
+            child: Icon(CupertinoIcons.leaf_arrow_circlepath),
+            label: 'Soil',
+          ),
           GlazeNavBarItem(child: Icon(CupertinoIcons.person), label: 'Profile'),
         ],
         gradient: LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
-          colors: [AppColor.primaryColor, AppColor.secondryColor],
+          colors: [AppColor.primaryColor, AppColor.secondaryColor],
         ),
         buttonGradient: LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
-          colors: [AppColor.primaryColor, AppColor.secondryColor],
+          colors: [AppColor.primaryColor, AppColor.secondaryColor],
         ),
       ),
     );

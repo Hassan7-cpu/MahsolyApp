@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 
@@ -19,11 +20,11 @@ class CustomButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         width: width ?? double.infinity,
-        height: 60,
+        height: 60.h,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(25.r),
           gradient: LinearGradient(
-            colors: [AppColor.primaryColor,AppColor.secondryColor ],
+            colors: [AppColor.primaryColor, AppColor.secondaryColor],
           ),
         ),
         child: Center(
@@ -31,7 +32,7 @@ class CustomButton extends StatelessWidget {
             buttonText,
             style: TextStyle(
               color: AppColor.lightBackground,
-              fontSize: 18,
+              fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),

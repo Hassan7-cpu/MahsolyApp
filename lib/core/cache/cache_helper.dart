@@ -28,13 +28,14 @@ class CacheHelper {
   }
 
   dynamic getData({required String key}) {
-     return _prefs.get(key);
+    return _prefs.get(key);
   }
 
   Future<bool> removeData({required String key}) async {
     return await _prefs.remove(key);
   }
-  Future<bool> clearData()async{
-   return await _prefs.clear();
+
+  Future<bool> clearData() async {
+    return await _prefs.clear();
   }
 }

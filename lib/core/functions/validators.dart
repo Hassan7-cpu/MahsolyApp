@@ -29,20 +29,6 @@ class Validators {
     return null;
   }
 
-  static String? phoneValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Phone number is required";
-    }
-
-    final phoneRegex = RegExp(r'^\d{10}$');
-
-    if (!phoneRegex.hasMatch(value)) {
-      return "Enter a valid 10-digit phone number";
-    }
-
-    return null;
-  }
-
   static String? nameValidator(String? value) {
     if (value == null || value.isEmpty) {
       return "Name is required";
@@ -52,4 +38,14 @@ class Validators {
     }
     return null;
   }
+}
+
+String? validateNumber(String? value) {
+  if (value == null || value.isEmpty) {
+    return "Required";
+  }
+  if (double.tryParse(value) == null) {
+    return "Enter valid number";
+  }
+  return null;
 }

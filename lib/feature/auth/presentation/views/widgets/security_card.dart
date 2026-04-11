@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/theme/text_style.dart';
@@ -12,28 +13,28 @@ class SecurityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
-   decoration: AppDecoration.card(context),
+      padding: EdgeInsets.all(16.r),
+      decoration: AppDecoration.card(context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(Icons.lock_clock_outlined
-              ,color: AppColor.primaryColor,),
-              SizedBox(width: 12,),
-              Text("Security",
-                  style: AppTextStyle.giloryBold18(context)),
+              Icon(Icons.lock_clock_outlined, color: AppColor.primaryColor),
+              SizedBox(width: 12.w),
+              Text("Security", style: AppTextStyle.giloryBold18(context)),
             ],
           ),
-          const SizedBox(height: 12),
-           CustomButtonAuth(
-                buttonText: "Update Password",
-               onPressed: () { Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => ChangePasswordView()),
-);  },
-              ),
+          SizedBox(height: 12.h),
+          CustomButtonAuth(
+            buttonText: "Update Password",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChangePasswordView()),
+              );
+            },
+          ),
         ],
       ),
     );

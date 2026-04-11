@@ -8,7 +8,7 @@ import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_textformfield.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/header_section.dart';
-import 'package:save_plant/feature/auth/presentation/views/widgets/signin_view_body.dart';
+import 'package:save_plant/feature/auth/presentation/views/widgets/login_view_body.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/text_description.dart';
 
 class SigninView extends StatefulWidget {
@@ -28,7 +28,7 @@ class _SigninViewState extends State<SigninView> {
           automaticallyImplyLeading: false,
           title: HeaderSection(image: AppAssets.logo, title: "PlantCare AI"),
         ),
-        body: SigninViewBody(),
+        body: LoginViewBody(),
       ),
     );
   }

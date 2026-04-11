@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/feature/home/data/model/item_model.dart';
@@ -40,19 +41,19 @@ class HeaderImage extends StatelessWidget {
         ),
         Positioned(
           top: MediaQuery.of(context).padding.top + 10,
-          left: 16,
+          left: 16.w,
           child: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(10.r),
               decoration: BoxDecoration(
                 color: AppColor.lightBackground,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_back_ios_new,
                 color: AppColor.darkBackground,
-                size: 20,
+                size: 20.sp,
               ),
             ),
           ),

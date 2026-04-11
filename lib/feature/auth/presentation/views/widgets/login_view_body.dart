@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/theme/text_style.dart';
@@ -7,14 +8,14 @@ import 'package:save_plant/feature/auth/presentation/views/widgets/custom_textfo
 import 'package:save_plant/feature/auth/presentation/views/widgets/text_description.dart';
 import 'package:save_plant/root.dart';
 
-class SigninViewBody extends StatefulWidget {
-  const SigninViewBody({super.key});
+class LoginViewBody extends StatefulWidget {
+  const LoginViewBody({super.key});
 
   @override
-  State<SigninViewBody> createState() => _SigninViewBodyState();
+  State<LoginViewBody> createState() => _LoginViewBodyState();
 }
 
-class _SigninViewBodyState extends State<SigninViewBody> {
+class _LoginViewBodyState extends State<LoginViewBody> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
@@ -45,20 +46,20 @@ class _SigninViewBodyState extends State<SigninViewBody> {
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 Text('Welcome Back', style: AppTextStyle.gilorybold30(context)),
                 Text(
                   'Sign in to continue protecting your plants',
                   style: AppTextStyle.giloryRegular16(context),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 50.h),
 
                 TilteDescription(title: 'Email'),
-                SizedBox(height: 3),
+                SizedBox(height: 3.h),
                 CustomTextformfield(
                   prefixIcon: Icons.email,
                   keyboardType: TextInputType.emailAddress,
@@ -66,9 +67,9 @@ class _SigninViewBodyState extends State<SigninViewBody> {
 
                   hintText: 'Enter your email',
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: 15.h),
                 TilteDescription(title: 'Password'),
-                SizedBox(height: 3),
+                SizedBox(height: 3.h),
                 CustomTextformfield(
                   prefixIcon: Icons.lock,
                   keyboardType: TextInputType.visiblePassword,
@@ -79,9 +80,9 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                   obscureText: true,
                 ),
 
-                SizedBox(height: 50),
-                CustomButtonAuth(onPressed: login, buttonText: 'Signin'),
-                SizedBox(height: 15),
+                SizedBox(height: 50.h),
+                CustomButtonAuth(onPressed: login, buttonText: 'Login'),
+                SizedBox(height: 15.h),
                 CustomButtonAuth(
                   onPressed: () {
                     Navigator.push(
@@ -89,8 +90,9 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                       MaterialPageRoute(builder: (context) => SignupView()),
                     );
                   },
-                  buttonText: 'Create an account',
+                  buttonText: 'Create a new account',
                 ),
+                SizedBox(height: 20.h),
               ],
             ),
           ),

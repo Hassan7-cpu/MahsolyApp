@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 
 class BuildFeatureCard extends StatelessWidget {
   const BuildFeatureCard({
     super.key,
-    required,
     required this.icon,
     required this.title,
     required this.subtitle,
@@ -14,10 +14,11 @@ class BuildFeatureCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final Color color;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.r),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -27,12 +28,12 @@ class BuildFeatureCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).colorScheme.onBackground.withOpacity(0.05),
             blurRadius: 12,
-            offset: const Offset(0, 10),
+            offset: Offset(0, 10),
           ),
         ],
       ),
@@ -40,20 +41,20 @@ class BuildFeatureCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(14),
+            padding: EdgeInsets.all(14.r),
             decoration: BoxDecoration(
               color: color.withOpacity(0.15),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: color, size: 28),
+            child: Icon(icon, color: color, size: 28.sp),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: AppTextStyle.giloryBold22(context)),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Text(subtitle, style: AppTextStyle.giloryRegular18(context)),
               ],
             ),

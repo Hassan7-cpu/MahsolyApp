@@ -3,23 +3,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/theme/cubit/theme_state.dart';
 
-
-enum ThemeModeState { light, dark, system }
-
-class ThemeCubit extends Cubit<ThemeState> {
- ThemeCubit() : super(const ThemeInitial()) {
-  loadSavedTheme();
-}
+class ThemeCubit extends Cubit<ThemeState> with WidgetsBindingObserver {
+  ThemeCubit() : super(const ThemeInitial()) {
+    WidgetsBinding.instance.addObserver(this);
+    loadSavedTheme();
+  }
 
   static ThemeCubit get(BuildContext context) =>
       BlocProvider.of<ThemeCubit>(context);
 
-  void setTheme(ThemeMode themeMode) async {
-    await CacheHelper().saveData(
-      key: "theme",
-      value: themeMode.name, 
-    );
+  @override
+  void didChangePlatformBrightness() {
+    final savedTheme = CacheHelper().getData(key: "theme");
 
+    if (savedTheme == "system" || savedTheme == null) {
+      final brightness =
+          WidgetsBinding.instance.platformDispatcher.platformBrightness;
+
+      final newMode = brightness == Brightness.dark
+          ? ThemeMode.dark
+          : ThemeMode.light;
+
+      emit(ThemeChanged(newMode));
+    }
+  }
+
+  void setTheme(ThemeMode themeMode) async {
+    await CacheHelper().saveData(key: "theme", value: themeMode.name);
     emit(ThemeChanged(themeMode));
   }
 
@@ -28,6 +38,9 @@ class ThemeCubit extends Cubit<ThemeState> {
 
     if (savedTheme != null) {
       emit(ThemeChanged(_getThemeFromString(savedTheme)));
+    } else {
+      // ← مهم جدًا
+      emit(const ThemeChanged(ThemeMode.system));
     }
   }
 
@@ -40,5 +53,11 @@ class ThemeCubit extends Cubit<ThemeState> {
       default:
         return ThemeMode.system;
     }
+  }
+
+  @override
+  Future<void> close() {
+    WidgetsBinding.instance.removeObserver(this);
+    return super.close();
   }
 }

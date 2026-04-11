@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 
 class CustomTextfield extends StatelessWidget {
@@ -13,6 +13,7 @@ class CustomTextfield extends StatelessWidget {
     this.onChanged,
     this.prefixIcon,
     this.suffixIcon,
+    this.keyboardType,
   });
   final TextEditingController? controller;
   final String? labeltext;
@@ -22,35 +23,47 @@ class CustomTextfield extends StatelessWidget {
   final Function(String)? onChanged;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-  @override
+  final TextInputType? keyboardType;
+
   @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 3,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(10.r),
       child: TextField(
+        keyboardType: keyboardType,
         onChanged: onChanged,
         controller: controller,
         focusNode: focusNode,
         enabled: enabled,
-        style: const TextStyle(color: AppColor.darkBackground),
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.onSurface,
+          fontSize: 14.sp,
+        ),
         decoration: InputDecoration(
           labelText: labeltext,
           hintText: hintText,
+          hintStyle: TextStyle(
+            color: Theme.of(context).colorScheme.onSurface,
+            fontSize: 14.sp,
+          ),
           filled: true,
-          fillColor: enabled
-              ? Theme.of(context).colorScheme.background
-              : Theme.of(
-                  context,
-                ).colorScheme.background, // لون مختلف لما يكون مقفول
-          enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+          fillColor: Theme.of(context).colorScheme.surface,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 16.w,
+            vertical: 14.h,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.r),
+            borderSide: BorderSide.none,
+          ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
             borderSide: BorderSide.none,
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Colors.green, width: 2),
+            borderRadius: BorderRadius.circular(10.r),
+            borderSide: BorderSide(color: Colors.green, width: 2.w),
           ),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,

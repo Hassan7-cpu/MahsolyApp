@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:save_plant/core/constants/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 
 class CustomButtonAuth extends StatelessWidget {
@@ -21,17 +21,19 @@ class CustomButtonAuth extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: width ?? double.infinity,
-        height: 60,
+        height: 50.h,
         decoration: BoxDecoration(
-            color:  AppColor.secondryColor,
-          
-          borderRadius: BorderRadius.circular(12),
+          gradient: LinearGradient(
+            colors: [
+              Theme.of(context).colorScheme.primary,
+              Theme.of(context).colorScheme.secondary,
+            ],
+          ),
+
+          borderRadius: BorderRadius.circular(12.r),
         ),
 
-        child: Text(
-          buttonText,
-          style: AppTextStyle.giloryRegular18(context)
-        ),
+        child: Text(buttonText, style: AppTextStyle.giloryRegular18(context)),
       ),
     );
   }

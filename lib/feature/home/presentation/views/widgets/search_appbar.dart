@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:save_plant/core/constants/app_colors.dart';
-import 'package:save_plant/core/theme/text_style.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:save_plant/core/widgets/custom_textfield.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/header_section.dart';
 
@@ -33,10 +32,10 @@ class _SearchAppBarState extends State<SearchAppBar> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HeaderSection(title: 'Mahsoly'),
-        SizedBox(height: 20),
+        SizedBox(height: 20.h),
         CustomTextfield(
           controller: _controller,
-          prefixIcon: Icon(Icons.search),
+          prefixIcon: Icon(Icons.search, size: 22.sp),
           onChanged: widget.onChanged,
           hintText: 'Search plants...',
           enabled: true,
@@ -46,9 +45,10 @@ class _SearchAppBarState extends State<SearchAppBar> {
               _controller.clear();
               widget.onClear();
             },
-            icon: Icon(Icons.close),
+            icon: Icon(Icons.close, size: 22.sp),
           ),
         ),
+        SizedBox(height: 4.h),
       ],
     );
   }

@@ -1,12 +1,11 @@
 class UserModel {
-  
   final String name;
   final String email;
   final String password;
-  final String ?image;
-  final String ?visa;
-  final String ?token;
-  final String ?address;
+  final String? image;
+  final String? visa;
+  final String? token;
+  final String? address;
 
   UserModel({
     required this.name,
@@ -17,7 +16,6 @@ class UserModel {
     this.token,
     this.address,
   });
-
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(

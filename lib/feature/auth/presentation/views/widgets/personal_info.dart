@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
@@ -19,22 +20,25 @@ class _PersonalInfoCardState extends State<PersonalInfoCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
-        decoration: AppDecoration.card(context),
+      padding: EdgeInsets.all(16.r),
+      decoration: AppDecoration.card(context),
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(CupertinoIcons.person,color: AppColor.primaryColor),
-              SizedBox(width: 12,),
-              Text("Personal Information", style: AppTextStyle.giloryBold18(context)),
+              Icon(CupertinoIcons.person, color: AppColor.primaryColor),
+              SizedBox(width: 12.w),
+              Text(
+                "Personal Information",
+                style: AppTextStyle.giloryBold18(context),
+              ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           ProfileEditTablefield(Focus: nameFocus, text: 'Full Name'),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.h),
           ProfileEditTablefield(Focus: emailFocus, text: 'Email'),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 
@@ -15,15 +16,15 @@ class OnboardingContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
         children: [
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           Expanded(
             flex: 6,
             child: Material(
               elevation: 4,
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(25.r),
               clipBehavior: Clip.antiAlias,
               child: Container(
                 width: double.infinity,
@@ -34,7 +35,7 @@ class OnboardingContent extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 30),
+          SizedBox(height: 30.h),
           Flexible(
             flex: 1,
             child: Text(
@@ -44,7 +45,7 @@ class OnboardingContent extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
 
           Flexible(
             flex: 2,

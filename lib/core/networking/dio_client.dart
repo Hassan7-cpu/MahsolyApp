@@ -6,21 +6,23 @@ import 'package:save_plant/core/networking/api_constant.dart';
 import 'package:save_plant/core/networking/api_interceptors.dart';
 import 'package:save_plant/core/networking/api_services.dart';
 
-
 class DioClient extends ApiServices {
   final Dio dio;
 
-  DioClient({required this.dio}){
+  DioClient({required this.dio}) {
     dio.options.baseUrl = Endpoints.baseUrl;
-     dio.interceptors.add(ApiInterceptors());
-     dio.interceptors.add(LogInterceptor(
-       request: true,
-      requestHeader: true,
-      requestBody: true,
-      responseHeader: true,
-      responseBody: true,
-      error: true,
- )) ;}
+    dio.interceptors.add(ApiInterceptors());
+    dio.interceptors.add(
+      LogInterceptor(
+        request: true,
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+        responseBody: true,
+        error: true,
+      ),
+    );
+  }
   @override
   Future<dynamic> delete(
     String path, {
@@ -31,7 +33,9 @@ class DioClient extends ApiServices {
     try {
       final Response = await dio.delete(
         path,
-        data: isFromData ? FormData.fromMap(data as Map<String, dynamic>) : data,
+        data: isFromData
+            ? FormData.fromMap(data as Map<String, dynamic>)
+            : data,
         queryParameters: queryParameters,
       );
       return Response.data;
@@ -83,7 +87,9 @@ class DioClient extends ApiServices {
     try {
       final Response = await dio.post(
         path,
-        data: isFromData ? FormData.fromMap(data as Map<String, dynamic>) : data,
+        data: isFromData
+            ? FormData.fromMap(data as Map<String, dynamic>)
+            : data,
         queryParameters: queryParameters,
       );
       return Response.data;

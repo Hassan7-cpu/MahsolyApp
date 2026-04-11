@@ -8,10 +8,10 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  HeaderSection(title: "Profile Settings",),
+        title: HeaderSection(title: "Profile Settings"),
         elevation: 0,
       ),
       body: ProfileViewBody(),
-      );
+    );
   }
 }

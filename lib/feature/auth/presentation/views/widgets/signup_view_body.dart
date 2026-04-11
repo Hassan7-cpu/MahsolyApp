@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/functions/validators.dart';
@@ -32,88 +33,92 @@ class _SignupViewBodyState extends State<SignupViewBody> {
         behavior: SnackBarBehavior.floating,
       ),
     );
-    Navigator.pop(context); 
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-               Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                                       SizedBox(height: 20),
+    return Form(
+      key: formKey,
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20.h),
 
-                      Text('Create Account', style: AppTextStyle.gilorybold30(context)),
-                      Text(
-                        'Start protecting your plants today',
-                        style: AppTextStyle.giloryRegular16(context),
-                      ),
-                      SizedBox(height: 50),
-                      TilteDescription(title: 'Full Name'),
-                      SizedBox(height: 3),
-                      CustomTextformfield(
-                        prefixIcon: Icons.person,
-                        keyboardType: TextInputType.name,
-                        controller: nameController,
-                        hintText: 'Enter your name',
-                        validator: Validators.nameValidator,
-                      ),
-                      SizedBox(height: 15),
-                      TilteDescription(title: 'Email'),
-                      SizedBox(height: 3),
-                      CustomTextformfield(
-                        prefixIcon: Icons.email,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: emailController,
-                        hintText: 'Enter your email',
-                        validator: Validators.emailValidator,
-                      ),
-                    SizedBox(height: 15),
-                      TilteDescription(title: 'Password'),
-                      SizedBox(height: 3),
-                      CustomTextformfield(
-                        prefixIcon: Icons.lock,
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: passwordController,
-          
-                        hintText:
-                            'At least 8 characters, a capital letter and a number',
-                        obscureText: true,
-                        suffixIcon: Icons.visibility,
-                        validator: Validators.passwordValidator,
-                      ),
-                      SizedBox(height: 15),
-                      TilteDescription(title: 'Confirm Password'),
-                      SizedBox(height: 3),
-                      CustomTextformfield(
-                        prefixIcon: Icons.lock,
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: passwordController,
-          
-                        hintText:'Re-enter your password',
-                                                obscureText: true,
-                        suffixIcon: Icons.visibility,
-                        validator: Validators.passwordValidator,
-                      ),
-                      SizedBox(height: 50),
-                      CustomButtonAuth(
-                        onPressed: signUp,
-                        buttonText: 'Create Account',
-                      ),
-                    ],
+                  Text(
+                    'Create Account',
+                    style: AppTextStyle.gilorybold30(context),
                   ),
-                ),
-            ],
-          ),
+                  Text(
+                    'Start protecting your plants today',
+                    style: AppTextStyle.giloryRegular16(context),
+                  ),
+                  SizedBox(height: 50.h),
+                  TilteDescription(title: 'Full Name'),
+                  SizedBox(height: 3.h),
+                  CustomTextformfield(
+                    prefixIcon: Icons.person,
+                    keyboardType: TextInputType.name,
+                    controller: nameController,
+                    hintText: 'Enter your name',
+                    validator: Validators.nameValidator,
+                  ),
+                  SizedBox(height: 15.h),
+                  TilteDescription(title: 'Email'),
+                  SizedBox(height: 3.h),
+                  CustomTextformfield(
+                    prefixIcon: Icons.email,
+                    keyboardType: TextInputType.emailAddress,
+                    controller: emailController,
+                    hintText: 'Enter your email',
+                    validator: Validators.emailValidator,
+                  ),
+                  SizedBox(height: 15.h),
+                  TilteDescription(title: 'Password'),
+                  SizedBox(height: 3.h),
+                  CustomTextformfield(
+                    prefixIcon: Icons.lock,
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: passwordController,
+
+                    hintText:
+                        'At least 8 characters, a capital letter and a number',
+                    obscureText: true,
+                    suffixIcon: Icons.visibility,
+                    validator: Validators.passwordValidator,
+                  ),
+                  SizedBox(height: 15.h),
+                  TilteDescription(title: 'Confirm Password'),
+                  SizedBox(height: 3.h),
+                  CustomTextformfield(
+                    prefixIcon: Icons.lock,
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: passwordController,
+
+                    hintText: 'Re-enter your password',
+                    obscureText: true,
+                    suffixIcon: Icons.visibility,
+                    validator: Validators.passwordValidator,
+                  ),
+                  SizedBox(height: 50.h),
+                  CustomButtonAuth(
+                    onPressed: signUp,
+                    buttonText: 'Create Account',
+                  ),
+                  SizedBox(height: 20.h),
+                ],
+              ),
+            ),
+          ],
         ),
+      ),
     );
   }
 }

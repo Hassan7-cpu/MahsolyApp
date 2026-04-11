@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/feature/home/data/model/item_model.dart';
 import 'package:save_plant/feature/home/presentation/views/plant_details_view.dart.dart';
@@ -9,6 +10,11 @@ class CardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
+    final cardWidth = (width - 48) / 2;
+    final imageHeight = height * 0.18;
+    final aspectRatio = cardWidth / imageHeight;
 
     return GestureDetector(
       onTap: () {
@@ -18,23 +24,23 @@ class CardItem extends StatelessWidget {
         );
       },
       child: Card(
-        margin: const EdgeInsets.all(8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        elevation: 4,
+        color: Theme.of(context).cardTheme.color,
+        margin: EdgeInsets.all(8.r),
+        shape: Theme.of(context).cardTheme.shape,
+        elevation: Theme.of(context).cardTheme.elevation,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(16),
-              ),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
               child: AspectRatio(
-                aspectRatio: 1,
+                aspectRatio: aspectRatio,
                 child: Image(image: item.image, fit: BoxFit.cover),
               ),
             ),
+            SizedBox(height: 6.h),
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(8.r),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -43,11 +49,11 @@ class CardItem extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: width * 0.05,
+                      fontSize: width * 0.04,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 4.h),
                 ],
               ),
             ),

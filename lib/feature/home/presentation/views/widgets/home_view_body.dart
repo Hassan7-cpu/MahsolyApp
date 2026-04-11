@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/constants/app_assets.dart';
 import 'package:save_plant/feature/home/presentation/views/widgets/card_item.dart';
@@ -23,7 +24,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Wheat Rust: Treat with fungicide such as Propiconazole',
       season: 'Winter – Spring',
     ),
-
     ItemModel(
       name: 'Banana',
       image: AppAssets.banana,
@@ -33,7 +33,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Panama Disease: Use disease-resistant varieties',
       season: 'All year in warm climates',
     ),
-
     ItemModel(
       name: 'Bell Pepper',
       image: AppAssets.bellPepper,
@@ -43,7 +42,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Aphids: Treat with neem oil spray',
       season: 'Spring – Summer',
     ),
-
     ItemModel(
       name: 'Clover',
       image: AppAssets.clover,
@@ -53,7 +51,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Leaf Spot: Apply fungicide spray',
       season: 'Winter – Spring',
     ),
-
     ItemModel(
       name: 'Corn',
       image: AppAssets.corn,
@@ -63,7 +60,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Corn Smut: Remove infected plants',
       season: 'Spring – Summer',
     ),
-
     ItemModel(
       name: 'Cotton',
       image: AppAssets.cotton,
@@ -73,7 +69,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Cotton Bollworm: Use insecticide or biological control',
       season: 'Spring – Summer',
     ),
-
     ItemModel(
       name: 'Cucumber',
       image: AppAssets.cucumber,
@@ -83,7 +78,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Powdery Mildew: Spray sulfur fungicide',
       season: 'Spring – Summer',
     ),
-
     ItemModel(
       name: 'Date Palm',
       image: AppAssets.datePalm,
@@ -93,7 +87,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Red Palm Weevil: Use insecticide treatment',
       season: 'Any time in warm regions',
     ),
-
     ItemModel(
       name: 'Eggplant',
       image: AppAssets.eggplant,
@@ -103,7 +96,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Flea Beetles: Use neem oil spray',
       season: 'Spring – Summer',
     ),
-
     ItemModel(
       name: 'Fig',
       image: AppAssets.fig,
@@ -113,7 +105,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Fig Rust: Apply copper fungicide',
       season: 'Spring – Summer',
     ),
-
     ItemModel(
       name: 'Garlic',
       image: AppAssets.garlic,
@@ -123,7 +114,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'White Rot: Remove infected plants',
       season: 'Autumn – Winter',
     ),
-
     ItemModel(
       name: 'Guava',
       image: AppAssets.guava,
@@ -133,7 +123,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Fruit Fly: Use traps or insecticides',
       season: 'Spring – Summer',
     ),
-
     ItemModel(
       name: 'Mango',
       image: AppAssets.mango,
@@ -143,7 +132,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Anthracnose: Spray fungicide',
       season: 'Summer planting',
     ),
-
     ItemModel(
       name: 'Onion',
       image: AppAssets.onion,
@@ -153,7 +141,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Downy Mildew: Use fungicide spray',
       season: 'Autumn – Winter',
     ),
-
     ItemModel(
       name: 'Orange',
       image: AppAssets.orange,
@@ -163,7 +150,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Citrus Canker: Remove infected leaves',
       season: 'Winter – Spring',
     ),
-
     ItemModel(
       name: 'Pepper',
       image: AppAssets.pepper,
@@ -173,7 +159,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Aphids: Treat with neem oil',
       season: 'Spring – Summer',
     ),
-
     ItemModel(
       name: 'Potato',
       image: AppAssets.potato,
@@ -183,7 +168,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
       commonDisease: 'Late Blight: Spray fungicide',
       season: 'Autumn – Winter',
     ),
-
     ItemModel(
       name: 'Tomato',
       image: AppAssets.tomato,
@@ -205,28 +189,26 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             );
           }).toList();
 
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  childAspectRatio: 0.77,
-                ),
-                itemCount: filteredItems.length,
-                itemBuilder: (context, index) {
-                  return CardItem(item: filteredItems[index]);
-                },
+    return Padding(
+      padding: EdgeInsets.all(10.r),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                childAspectRatio: 0.77,
               ),
+              itemCount: filteredItems.length,
+              itemBuilder: (context, index) {
+                return CardItem(item: filteredItems[index]);
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
