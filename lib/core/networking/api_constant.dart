@@ -1,8 +1,8 @@
 class Endpoints {
-  static const String baseUrl =
-      'https://mahsoly-app-8ehw-q29vnrq31-mahsoly.vercel.app/';
+  static const String baseUrl = 'https://mahsoly-app-8ehw.vercel.app/';
   static const String signIn = 'auth/login';
   static String signUp = "auth/register";
+  static String uploadImage = "scan";
 }
 
 //دي الحاجات الي في ال response

@@ -37,14 +37,21 @@ class UserRepository {
         return Left("Please enter a valid email and password");
       }
 
+      // ✅ هنا بالظبط
       final decodedToken = JwtDecoder.decode(token);
-      CacheHelper().saveData(key: ApiKey.access_token, value: token);
-      CacheHelper().saveData(key: ApiKey.id, value: decodedToken[ApiKey.id]);
+      final userId = decodedToken['sub'] as String? ?? '';
+
+      await CacheHelper().saveData(key: ApiKey.access_token, value: token);
+      await CacheHelper().saveData(key: ApiKey.id, value: userId);
+
+      print("✅ TOKEN: $token");
+      print("✅ USER ID: $userId");
 
       return Right(user);
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     } catch (e) {
+      print("❌ signIn error: $e");
       return Left(e.toString());
     }
   }

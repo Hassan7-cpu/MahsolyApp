@@ -1,23 +1,26 @@
+import 'package:dio/src/options.dart';
+
 abstract class ApiConsumer {
   Future<dynamic> get(
-    String path, {
+    String url, {
     Object? data,
     Map<String, dynamic>? queryParameters,
   });
   Future<dynamic> post(
-    String path, {
+    String url, {
     Object? data,
     Map<String, dynamic>? queryParameters,
     bool isFromData = false,
+    Options? options,
   });
   Future<dynamic> patch(
-    String path, {
+    String Url, {
     Object? data,
     Map<String, dynamic>? queryParameters,
     bool isFromData = false,
   });
   Future<dynamic> delete(
-    String path, {
+    String Url, {
     Object? data,
     Map<String, dynamic>? queryParameters,
     bool isFromData = false,

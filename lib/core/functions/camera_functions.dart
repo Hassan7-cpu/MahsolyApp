@@ -1,45 +1,32 @@
+import 'dart:io';
 import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
-import 'package:gal/gal.dart';
 import 'package:image_picker/image_picker.dart';
 
-Future<void> pickFromGallery(dynamic _picker, BuildContext context) async {
+Future<File?> pickFromGallery(ImagePicker picker) async {
   try {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
-    if (image != null) {
-      print("Selected: ${image.path}");
+    if (image == null) return null;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Photo selected successfully! 🖼️'),
-          backgroundColor: Colors.green,
-          duration: Duration(seconds: 2),
-        ),
-      );
-    }
+    print("Selected: ${image.path}");
+
+    return File(image.path);
   } catch (e) {
     print("Error picking image: $e");
+    return null;
   }
 }
 
-Future<void> takePicture(BuildContext context, dynamic cameraController) async {
+Future<File?> takePicture(CameraController controller) async {
   try {
-    if (!cameraController.value.isInitialized) return;
+    if (!controller.value.isInitialized) return null;
 
-    final image = await cameraController.takePicture();
+    final XFile image = await controller.takePicture();
 
-    await Gal.putImage(image.path);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Photo captured successfully! 📸'),
-        backgroundColor: Colors.green,
-        duration: Duration(seconds: 2),
-      ),
-    );
+    return File(image.path);
   } catch (e) {
     print("Error taking picture: $e");
+    return null;
   }
 }
 

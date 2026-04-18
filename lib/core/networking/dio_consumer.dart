@@ -24,14 +24,14 @@ class DioConsumer extends ApiConsumer {
 
   @override
   Future delete(
-    String path, {
+    String Url, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     bool isFromData = false,
   }) async {
     try {
       final response = await dio.delete(
-        path,
+        Url,
         data: isFromData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
@@ -43,13 +43,13 @@ class DioConsumer extends ApiConsumer {
 
   @override
   Future get(
-    String path, {
+    String Url, {
     Object? data,
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
       final response = await dio.get(
-        path,
+        Url,
         data: data,
         queryParameters: queryParameters,
       );
@@ -61,14 +61,14 @@ class DioConsumer extends ApiConsumer {
 
   @override
   Future patch(
-    String path, {
+    String Url, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     bool isFromData = false,
   }) async {
     try {
       final response = await dio.patch(
-        path,
+        Url,
         data: isFromData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
@@ -80,16 +80,18 @@ class DioConsumer extends ApiConsumer {
 
   @override
   Future post(
-    String path, {
+    String Url, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     bool isFromData = false,
+    Options? options,
   }) async {
     try {
       final response = await dio.post(
-        path,
+        Url,
         data: isFromData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
+        options: options,
       );
       return response.data;
     } on DioException catch (e) {

@@ -10,7 +10,6 @@ import 'package:save_plant/core/theme/cubit/theme_state.dart';
 import 'package:save_plant/feature/auth/data/repo/user_repository.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
-import 'package:save_plant/feature/home/presentation/views/home_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

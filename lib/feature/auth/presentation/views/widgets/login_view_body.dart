@@ -46,13 +46,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             snackBarMessage(context, state.errMessage, color: Colors.red);
           }
           if (state is SignInSuccess) {
-            snackBarMessage(
-              context,
-              state.message ?? "Login successful",
-              color: Colors.green,
-            );
+            snackBarMessage(context, "Login successful", color: Colors.green);
 
-            Navigator.push(context, MaterialPageRoute(builder: (_) => Root()));
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => Root()),
+            );
           }
         },
         builder: (context, state) {

@@ -1,10 +1,13 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; // 🔥 (ADDED) عشان نستخدم Cubit
 import 'package:image_picker/image_picker.dart';
 import 'package:save_plant/core/functions/camera_functions.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/header_section.dart';
+import 'package:save_plant/feature/camera/presentation/cubit/Upload_plant_image_Cubit.dart';
 import 'package:save_plant/feature/camera/presentation/views/widgets/build_buttom.dart';
+// 🔥 (ADDED) Cubit المسؤول عن رفع الصورة
 
 class BuildCameraPreview extends StatefulWidget {
   const BuildCameraPreview({
@@ -26,14 +29,14 @@ class _BuildCameraPreviewState extends State<BuildCameraPreview> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
     final buttonSize = screenWidth * 0.18;
     final innerCircleRadius = buttonSize * 0.37;
     final bottomPadding = screenHeight * 0.04;
     final horizontalPadding = screenWidth * 0.04;
 
     return Scaffold(
-      appBar: AppBar(title: HeaderSection(title: 'Scan Your Plant')),
+      appBar: AppBar(title: const HeaderSection(title: 'Scan Your Plant')),
+
       body: SafeArea(
         child: Stack(
           children: [
@@ -46,6 +49,7 @@ class _BuildCameraPreviewState extends State<BuildCameraPreview> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  // 🔦 زرار الفلاش
                   BuildButtom(
                     icon: _isFlashOn
                         ? CupertinoIcons.bolt_fill
@@ -59,7 +63,12 @@ class _BuildCameraPreviewState extends State<BuildCameraPreview> {
                   ),
 
                   GestureDetector(
-                    onTap: () => takePicture(context, widget._cameraController),
+                    onTap: () async {
+                      final file = await takePicture(widget._cameraController);
+                      if (file != null && context.mounted) {
+                        context.read<UploadPlantImageCubit>().uploadImage(file);
+                      }
+                    },
                     child: Container(
                       width: buttonSize,
                       height: buttonSize,
@@ -78,10 +87,14 @@ class _BuildCameraPreviewState extends State<BuildCameraPreview> {
                       ),
                     ),
                   ),
-
                   BuildButtom(
                     icon: CupertinoIcons.photo,
-                    onTap: () => pickFromGallery(_picker, context),
+                    onTap: () async {
+                      final file = await pickFromGallery(_picker);
+                      if (file != null && context.mounted) {
+                        context.read<UploadPlantImageCubit>().uploadImage(file);
+                      }
+                    },
                   ),
                 ],
               ),
