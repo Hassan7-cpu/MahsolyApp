@@ -7,6 +7,7 @@ import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/functions/validators.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_state.dart';
+import 'package:save_plant/feature/auth/presentation/views/otp_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_textformfield.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/text_description.dart';
@@ -44,8 +45,12 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               state.message,
               color: AppColor.primaryColor,
             );
-
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => OtpView(email: emailController.text),
+              ),
+            );
           });
         }
       },

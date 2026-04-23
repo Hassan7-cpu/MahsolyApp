@@ -8,6 +8,13 @@ class SignInSuccess extends UserState {
   SignInSuccess({this.message});
 }
 
+class SignInNeedVerification extends UserState {
+  final String email;
+  final String message;
+
+  SignInNeedVerification({required this.email, required this.message});
+}
+
 final class UploadProfilePic extends UserState {}
 
 final class SignInLoading extends UserState {}

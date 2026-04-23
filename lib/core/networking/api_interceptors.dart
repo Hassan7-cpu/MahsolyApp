@@ -7,7 +7,17 @@ class ApiInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final token = CacheHelper().getData(key: ApiKey.access_token);
 
-    if (token != null && token.toString().isNotEmpty && token != "null") {
+    // 🧠 check if request is auth endpoint
+    final isAuthRequest =
+        options.path.contains(Endpoints.signIn) ||
+        options.path.contains(Endpoints.signUp) ||
+        options.path.contains(Endpoints.verifyOtp);
+
+    // ✅ ضيف التوكن بس لو مش auth request
+    if (!isAuthRequest &&
+        token != null &&
+        token.toString().isNotEmpty &&
+        token != "null") {
       options.headers['Authorization'] = 'Bearer $token';
     }
 

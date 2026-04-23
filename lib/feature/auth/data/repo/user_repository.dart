@@ -18,28 +18,37 @@ class UserRepository {
   }) async {
     try {
       final response = await api.post(
-        ' ${Endpoints.baseUrl}${Endpoints.signIn}',
+        '${Endpoints.baseUrl}${Endpoints.signIn}', // ❗ شيلنا المسافة
         data: {ApiKey.email: email, ApiKey.password: password},
       );
 
-      if (response[ApiKey.access_token] == null) {
+      // لو ApiConsumer بيرجع Response → استخدم .data
+      final data = response;
+
+      // ❗ لو مفيش token → error من السيرفر
+      if (data[ApiKey.access_token] == null ||
+          data[ApiKey.access_token].toString().isEmpty) {
         final serverMsg =
-            response[ApiKey.detail] as String? ??
-            response['message'] as String? ??
+            data[ApiKey.detail]?.toString() ??
+            data['message']?.toString() ??
             'Please enter a valid email and password';
         return Left(serverMsg);
       }
 
-      final user = SignInModel.fromJson(response);
+      final user = SignInModel.fromJson(data);
+
       final token = user.token;
-
       if (token == null || token.isEmpty) {
-        return Left("Please enter a valid email and password");
+        return Left("Invalid token");
       }
-      final decodedToken = JwtDecoder.decode(token);
-      final userId = decodedToken['sub'] as String? ?? '';
 
+      // decode token
+      final decodedToken = JwtDecoder.decode(token);
+      final userId = decodedToken['sub']?.toString() ?? '';
+
+      // ✅ خزّن التوكن صح
       await CacheHelper().saveData(key: ApiKey.access_token, value: token);
+
       await CacheHelper().saveData(key: ApiKey.id, value: userId);
 
       print("✅ TOKEN: $token");
@@ -50,7 +59,7 @@ class UserRepository {
       return Left(e.errModel.errorMessage);
     } catch (e) {
       print("❌ signIn error: $e");
-      return Left(e.toString());
+      return Left("Something went wrong");
     }
   }
 

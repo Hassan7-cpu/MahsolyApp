@@ -7,6 +7,7 @@ import 'package:save_plant/core/functions/validators.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_state.dart';
+import 'package:save_plant/feature/auth/presentation/views/otp_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/signup_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_textformfield.dart';
@@ -43,6 +44,14 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         listener: (context, state) {
           if (state is SignInFailure) {
             snackBarMessage(context, state.errMessage, color: Colors.red);
+          }
+          if (state is SignInNeedVerification) {
+            snackBarMessage(context, state.message, color: Colors.orange);
+
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => OtpView(email: state.email)),
+            );
           }
           if (state is SignInSuccess) {
             snackBarMessage(context, "Login successful", color: Colors.green);

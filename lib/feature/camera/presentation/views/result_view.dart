@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:save_plant/core/functions/app_decoration.dart';
 import 'package:save_plant/core/theme/text_style.dart';
+import 'package:save_plant/core/widgets/custom_button.dart';
 import 'package:save_plant/feature/camera/data/model/scan_model.dart';
+import 'package:save_plant/feature/camera/presentation/views/camera_view.dart';
 
 class ResultView extends StatelessWidget {
   final ScanModel data;
@@ -12,7 +14,10 @@ class ResultView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Analysis Result")),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text("Analysis Result"),
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.r),
         child: Column(
@@ -68,6 +73,16 @@ class ResultView extends StatelessWidget {
                 "Confidence: ${(data.confidence * 100).toStringAsFixed(1)}%",
                 style: TextStyle(fontSize: 16.sp),
               ),
+            ),
+            SizedBox(height: 100.h),
+            CustomButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CameraView()),
+                );
+              },
+              buttonText: "Scan Another",
             ),
           ],
         ),

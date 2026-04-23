@@ -15,14 +15,20 @@ class UserCubit extends Cubit<UserState> {
 
       result.fold(
         (error) {
-          emit(SignInFailure(errMessage: error));
+          // 👇 لو الحساب مش متفعل
+          if (error.contains("Verify your account")) {
+            emit(SignInNeedVerification(email: email, message: error));
+          } else {
+            emit(SignInFailure(errMessage: error));
+          }
         },
-        (model) {
-          emit(SignInSuccess(message: model.message ?? "Success"));
+        (user) {
+          emit(SignInSuccess());
         },
       );
     } catch (e) {
-      emit(SignInFailure(errMessage: e.toString()));
+      emit(SignInFailure(errMessage: "Something went wrong"));
+      print("❌ Cubit signIn error: $e");
     }
   }
 
@@ -31,16 +37,20 @@ class UserCubit extends Cubit<UserState> {
   // =========================
   Future<void> signUp(String name, String email, String password) async {
     emit(SignUpLoading());
-    print("START SIGNUP");
-    final response = await repository.signUp(
-      name: name,
-      email: email,
-      password: password,
-    );
-    print("AFTER RESPONSE");
-    response.fold(
-      (errMessage) => emit(SignUpFailure(errMessage: errMessage)),
-      (signUpModel) => emit(SignUpSuccess(message: signUpModel.message)),
-    );
+
+    try {
+      final response = await repository.signUp(
+        name: name,
+        email: email,
+        password: password,
+      );
+
+      response.fold(
+        (errMessage) => emit(SignUpFailure(errMessage: errMessage)),
+        (signUpModel) => emit(SignUpSuccess(message: signUpModel.message)),
+      );
+    } catch (e) {
+      emit(SignUpFailure(errMessage: "Something went wrong"));
+    }
   }
 }

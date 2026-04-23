@@ -9,9 +9,7 @@ import 'package:save_plant/core/theme/cubit/theme_cubit.dart';
 import 'package:save_plant/core/theme/cubit/theme_state.dart';
 import 'package:save_plant/feature/auth/data/repo/user_repository.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_cubit.dart';
-import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
-import 'package:save_plant/feature/soil_input/presentation/view/crop_result_view.dart';
-import 'package:save_plant/feature/soil_input/presentation/view/soil_input_view.dart';
+import 'package:save_plant/feature/onboarding/onboarding_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +42,7 @@ class Mahsoly extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: state.themeMode,
-                home: SoilInputView(),
+                home: OnboardingView(),
               );
             },
           );
