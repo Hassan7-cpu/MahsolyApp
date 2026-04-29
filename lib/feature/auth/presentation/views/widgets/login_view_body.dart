@@ -113,7 +113,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                           ? CircularProgressIndicator(
                               color: Theme.of(context).colorScheme.onPrimary,
                             )
-                          : Text('Login'),
+                          : Text(
+                              'Login',
+                              style: AppTextStyle.giloryRegular18(context),
+                            ),
                     ),
                     SizedBox(height: 15.h),
                     CustomButtonAuth(

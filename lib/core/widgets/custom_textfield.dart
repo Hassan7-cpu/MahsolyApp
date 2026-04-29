@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:save_plant/core/constants/app_colors.dart';
 
 class CustomTextfield extends StatelessWidget {
   const CustomTextfield({
@@ -62,7 +63,7 @@ class CustomTextfield extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.r),
-            borderSide: BorderSide(color: Colors.green, width: 2.w),
+            borderSide: BorderSide(color: AppColor.primaryColor, width: 2.w),
           ),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,

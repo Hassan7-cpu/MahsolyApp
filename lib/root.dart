@@ -4,6 +4,7 @@ import 'package:glaze_nav_bar/glaze_nav_bar.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/feature/auth/presentation/views/setting_view.dart';
 import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
+import 'package:save_plant/feature/chat/presentation/view/chatbot_view.dart';
 import 'package:save_plant/feature/home/presentation/views/home_view.dart';
 import 'package:save_plant/feature/soil_input/presentation/view/soil_input_view.dart';
 
@@ -25,7 +26,13 @@ class _RootState extends State<Root> {
     super.initState();
     pageController = PageController(initialPage: currentPage);
 
-    pages = [HomeView(), PhotoTipsView(), SoilInputView(), SettingView()];
+    pages = [
+      HomeView(),
+      PhotoTipsView(),
+      SoilInputView(),
+      SettingView(),
+      ChatbotView(),
+    ];
   }
 
   @override
@@ -69,6 +76,11 @@ class _RootState extends State<Root> {
             label: 'Soil',
           ),
           GlazeNavBarItem(child: Icon(CupertinoIcons.person), label: 'Profile'),
+
+          GlazeNavBarItem(
+            child: Icon(CupertinoIcons.chat_bubble),
+            label: 'ChatBot',
+          ),
         ],
         gradient: LinearGradient(
           begin: Alignment.bottomLeft,
