@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:save_plant/core/functions/camera_functions.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/header_section.dart';
 import 'package:save_plant/feature/camera/presentation/cubit/Upload_plant_image_Cubit.dart';
+import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
 import 'package:save_plant/feature/camera/presentation/views/widgets/build_buttom.dart';
 
 class BuildCameraPreview extends StatefulWidget {
@@ -34,7 +35,24 @@ class _BuildCameraPreviewState extends State<BuildCameraPreview> {
     final horizontalPadding = screenWidth * 0.04;
 
     return Scaffold(
-      appBar: AppBar(title: const HeaderSection(title: 'Scan Your Plant')),
+      appBar: AppBar(
+        title: const HeaderSection(title: 'Scan Your Plant'),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const PhotoTipsView()),
+              );
+            },
+            icon: Icon(
+              Icons.close,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+        ],
+      ),
 
       body: SafeArea(
         child: Stack(

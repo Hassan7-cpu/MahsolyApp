@@ -19,9 +19,9 @@ class OnboardingContent extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
         children: [
-          SizedBox(height: 20.h),
-          Expanded(
-            flex: 6,
+          SizedBox(height: 5.h),
+          AspectRatio(
+            aspectRatio: 1.2,
             child: Material(
               elevation: 4,
               borderRadius: BorderRadius.circular(25.r),
@@ -35,29 +35,25 @@ class OnboardingContent extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 30.h),
-          Flexible(
-            flex: 1,
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: AppTextStyle.giloryBold24(context),
-            ),
+          SizedBox(height: 20.h),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: AppTextStyle.giloryBold24(context),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-
           SizedBox(height: 10.h),
-
-          Flexible(
-            flex: 2,
-            child: Text(
-              desc,
-              textAlign: TextAlign.center,
-              style: AppTextStyle.giloryRegular16(
-                context,
-              ).copyWith(color: Colors.grey),
-            ),
+          Text(
+            desc,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: AppTextStyle.giloryRegular16(
+              context,
+            ).copyWith(color: Colors.grey),
           ),
-          const Spacer(),
+          SizedBox(height: 30.h),
         ],
       ),
     );

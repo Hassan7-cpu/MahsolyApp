@@ -26,13 +26,7 @@ class _RootState extends State<Root> {
     super.initState();
     pageController = PageController(initialPage: currentPage);
 
-    pages = [
-      HomeView(),
-      PhotoTipsView(),
-      SoilInputView(),
-      SettingView(),
-      ChatbotView(),
-    ];
+    pages = [HomeView(), PhotoTipsView(), SoilInputView(), ChatbotView()];
   }
 
   @override
@@ -75,12 +69,8 @@ class _RootState extends State<Root> {
             child: Icon(CupertinoIcons.leaf_arrow_circlepath),
             label: 'Soil',
           ),
-          GlazeNavBarItem(child: Icon(CupertinoIcons.person), label: 'Profile'),
 
-          GlazeNavBarItem(
-            child: Icon(CupertinoIcons.chat_bubble),
-            label: 'ChatBot',
-          ),
+          GlazeNavBarItem(child: Icon(Icons.smart_toy), label: 'ChatBot'),
         ],
         gradient: LinearGradient(
           begin: Alignment.bottomLeft,

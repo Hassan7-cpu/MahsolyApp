@@ -12,6 +12,8 @@ import 'package:save_plant/core/theme/cubit/theme_state.dart';
 import 'package:save_plant/feature/auth/data/repo/user_repository.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
+import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
+import 'package:save_plant/feature/onboarding/onboarding_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +52,7 @@ class Mahsoly extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: state.themeMode,
-                home: LoginView(),
+                home: OnboardingView(),
               );
             },
           );

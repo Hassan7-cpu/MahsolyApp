@@ -79,8 +79,6 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
               body: Center(child: CircularProgressIndicator()),
             );
           }
-
-          // ✅ أضف الحالة دي
           if (state is UploadPlantImageSuccess) {
             return const Scaffold(
               body: Center(child: CircularProgressIndicator()),
