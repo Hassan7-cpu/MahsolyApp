@@ -1,11 +1,10 @@
 class UserState {}
 
-final class UserInitial extends UserState {}
+class UserInitial extends UserState {}
 
 class SignInSuccess extends UserState {
-  final String? message;
-
-  SignInSuccess({this.message});
+  final dynamic user;
+  SignInSuccess({this.user});
 }
 
 class SignInNeedVerification extends UserState {

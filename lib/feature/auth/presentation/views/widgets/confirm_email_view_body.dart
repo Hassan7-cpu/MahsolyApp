@@ -1,45 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/functions/snackbar_message.dart';
 import 'package:save_plant/core/theme/text_style.dart';
+import 'package:save_plant/feature/auth/presentation/cubit/confirm_email_otp_cubit.dart';
+import 'package:save_plant/feature/auth/presentation/cubit/confirm_email_otp_state.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/otp_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/otp_state.dart';
-import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
+import 'package:save_plant/feature/auth/presentation/views/setting_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 
-class OtpViewBody extends StatefulWidget {
-  const OtpViewBody({super.key, required this.email});
+class ConfirmEmailViewBody extends StatelessWidget {
+  ConfirmEmailViewBody({super.key, required this.email});
   final String email;
 
-  @override
-  State<OtpViewBody> createState() => _OtpViewBodyState();
-}
-
-class _OtpViewBodyState extends State<OtpViewBody> {
   final TextEditingController otpController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(20.w),
-      child: BlocConsumer<OtpCubit, OtpState>(
+      child: BlocConsumer<EmailOtpCubit, EmailOtpState>(
         listener: (context, state) {
-          if (state is OtpSuccess) {
+          if (state is EmailOtpSuccess) {
             snackBarMessage(
               context,
               state.message,
               color: AppColor.primaryColor,
             );
-
-            Navigator.pushReplacement(
+            CacheHelper().saveData(key: 'email', value: email);
+            Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (_) => LoginView()),
+              MaterialPageRoute(builder: (_) => SettingView()),
+              (route) => false,
             );
           }
 
-          if (state is OtpFailure) {
+          if (state is EmailOtpFailure) {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(state.error)));
@@ -56,7 +55,7 @@ class _OtpViewBodyState extends State<OtpViewBody> {
               ),
               SizedBox(height: 5.h),
               Text(
-                widget.email,
+                email,
                 style: AppTextStyle.giloryRegular16(
                   context,
                 ).copyWith(color: AppColor.primaryColor),
@@ -76,16 +75,16 @@ class _OtpViewBodyState extends State<OtpViewBody> {
               SizedBox(
                 width: double.infinity,
                 child: CustomButtonAuth(
-                  onPressed: state is OtpLoading
+                  onPressed: state is EmailOtpLoading
                       ? null
                       : () {
-                          context.read<OtpCubit>().verifyOtp(
-                            email: widget.email,
+                          context.read<EmailOtpCubit>().verifyOtp(
+                            email: email,
                             otp: otpController.text.trim(),
                           );
                         },
                   buttonText: 'Verify',
-                  isLoading: state is OtpLoading,
+                  isLoading: state is EmailOtpLoading,
                 ),
               ),
             ],

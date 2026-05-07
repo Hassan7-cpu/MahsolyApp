@@ -2,33 +2,31 @@
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/widgets/custom_textfield.dart';
+import 'package:save_plant/feature/auth/presentation/cubit/setting_cubit.dart';
 
 class ProfileEditTablefield extends StatefulWidget {
   const ProfileEditTablefield({
     super.key,
-    required this.Focus,
+    required this.focus,
     required this.text,
+    required this.controller,
+    this.isEmail = false,
   });
-  final FocusNode Focus;
+
+  final FocusNode focus;
   final String text;
+  final TextEditingController controller;
+  final bool isEmail;
+
   @override
   State<ProfileEditTablefield> createState() => _ProfileEditTablefieldState();
 }
 
 class _ProfileEditTablefieldState extends State<ProfileEditTablefield> {
-  final TextEditingController nameController = TextEditingController();
-
-  final TextEditingController emailController = TextEditingController();
-
   bool isEditing = false;
-  @override
-  void dispose() {
-    nameController.dispose();
-    emailController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +34,9 @@ class _ProfileEditTablefieldState extends State<ProfileEditTablefield> {
       children: [
         Expanded(
           child: CustomTextfield(
-            controller: emailController,
+            controller: widget.controller,
             labeltext: widget.text,
-            focusNode: widget.Focus,
+            focusNode: widget.focus,
             enabled: isEditing,
           ),
         ),
@@ -48,11 +46,19 @@ class _ProfileEditTablefieldState extends State<ProfileEditTablefield> {
             backgroundColor: isEditing ? Colors.green : Colors.grey,
           ),
           onPressed: () {
+            if (isEditing) {
+              if (widget.isEmail) {
+                context.read<SettingCubit>().changeEmail(
+                  email: widget.controller.text,
+                );
+              }
+            }
+
             setState(() {
               isEditing = !isEditing;
             });
             if (isEditing) {
-              FocusScope.of(context).requestFocus(widget.Focus);
+              FocusScope.of(context).requestFocus(widget.focus);
             } else {
               FocusScope.of(context).unfocus();
             }

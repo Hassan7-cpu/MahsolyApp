@@ -1,16 +1,27 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:save_plant/core/networking/dio_consumer.dart';
+import 'package:save_plant/feature/auth/data/repo/setting_repository.dart';
+import 'package:save_plant/feature/auth/presentation/cubit/setting_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/header_section.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/setting_view_body.dart';
 
 class SettingView extends StatelessWidget {
-  SettingView({super.key});
+  const SettingView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: HeaderSection(title: "Settings"), elevation: 0),
-      body: SettingViewBody(),
+    return BlocProvider(
+      create: (context) => SettingCubit(
+        settingRepository: SettingRepository(api: DioConsumer(dio: Dio())),
+      ),
+      child: Scaffold(
+        appBar: AppBar(title: const HeaderSection(title: "Settings")),
+        body: const SettingViewBody(),
+      ),
     );
   }
 }

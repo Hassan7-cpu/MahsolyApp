@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/feature/auth/presentation/views/setting_view.dart';
-import 'package:save_plant/feature/home/presentation/views/widgets/profile_header_section.dart';
+import 'package:save_plant/feature/auth/presentation/views/widgets/profile_header_section.dart';
 import 'package:save_plant/feature/home/presentation/views/dashboard_view.dart';
 
 class AppDrawer extends StatelessWidget {

@@ -1,8 +1,10 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/functions/app_decoration.dart';
+import 'package:save_plant/feature/auth/presentation/cubit/setting_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/change_password_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 
@@ -31,7 +33,12 @@ class SecurityCard extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ChangePasswordView()),
+                MaterialPageRoute(
+                  builder: (_) => BlocProvider.value(
+                    value: context.read<SettingCubit>(),
+                    child: const ChangePasswordView(),
+                  ),
+                ),
               );
             },
           ),

@@ -142,12 +142,8 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                           );
                           print("SIGNUP STARTED");
                         },
-                        buttonText: '',
-                        child: state is SignUpLoading
-                            ? CircularProgressIndicator(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              )
-                            : Text('Create Account'),
+                        buttonText: 'Create Account',
+                        isLoading: state is SignUpLoading,
                       ),
                       SizedBox(height: 20.h),
                     ],

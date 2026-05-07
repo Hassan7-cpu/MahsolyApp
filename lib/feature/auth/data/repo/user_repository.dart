@@ -32,9 +32,7 @@ class UserRepository {
             'Please enter a valid email and password';
         return Left(serverMsg);
       }
-
       final user = SignInModel.fromJson(data);
-
       final token = user.token;
       if (token == null || token.isEmpty) {
         return Left("Invalid token");
@@ -44,7 +42,7 @@ class UserRepository {
       final userId = decodedToken['sub']?.toString() ?? '';
 
       await CacheHelper().saveData(key: ApiKey.access_token, value: token);
-
+      await CacheHelper().saveData(key: ApiKey.email, value: email);
       await CacheHelper().saveData(key: ApiKey.id, value: userId);
 
       print(" TOKEN: $token");
@@ -74,6 +72,7 @@ class UserRepository {
         },
       );
       final signUPModel = SignUpModel.fromJson(response);
+      await CacheHelper().saveData(key: 'name', value: name);
       return Right(signUPModel);
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);

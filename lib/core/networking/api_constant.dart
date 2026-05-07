@@ -2,7 +2,10 @@ class Endpoints {
   static const String baseUrl = 'https://mahsoly-app-8ehw.vercel.app/';
   static const String signIn = 'auth/login';
   static String signUp = "auth/register";
+  static String ChangeEmail = "auth/change-email";
+  static String changePassword = "auth/change-password";
   static String verifyOtp = "auth/verify-otp";
+  static String confirmOtp = "auth/confirm-email-otp";
   static String uploadImage = "scan";
   static String predictCrop = "predict-crop";
 }

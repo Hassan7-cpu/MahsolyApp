@@ -14,11 +14,9 @@ class OtpCubit extends Cubit<OtpState> {
 
     result.fold(
       (error) {
-        // ❌ failure
         emit(OtpFailure(error));
       },
       (success) {
-        // ✅ success
         emit(OtpSuccess("Account verified successfully"));
       },
     );

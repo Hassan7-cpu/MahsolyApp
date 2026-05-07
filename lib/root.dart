@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:glaze_nav_bar/glaze_nav_bar.dart';
+import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
-import 'package:save_plant/feature/auth/presentation/views/setting_view.dart';
+import 'package:save_plant/core/networking/api_constant.dart';
+import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
 import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
 import 'package:save_plant/feature/chat/presentation/view/chatbot_view.dart';
 import 'package:save_plant/feature/home/presentation/views/home_view.dart';
@@ -24,9 +26,35 @@ class _RootState extends State<Root> {
   @override
   void initState() {
     super.initState();
+
     pageController = PageController(initialPage: currentPage);
 
-    pages = [HomeView(), PhotoTipsView(), SoilInputView(), ChatbotView()];
+    pages = [
+      const HomeView(),
+      const PhotoTipsView(),
+      const SoilInputView(),
+      const ChatbotView(),
+    ];
+
+    _checkAuth();
+  }
+
+  void _checkAuth() {
+    final token = CacheHelper().getData(key: ApiKey.access_token);
+
+    final isLoggedIn = token != null && token.toString().isNotEmpty;
+
+    if (!isLoggedIn) {
+      Future.microtask(() {
+        if (!mounted) return;
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => LoginView()),
+          (route) => false,
+        );
+      });
+    }
   }
 
   @override
@@ -59,7 +87,7 @@ class _RootState extends State<Root> {
           });
           pageController.jumpToPage(index);
         },
-        items: [
+        items: const [
           GlazeNavBarItem(child: Icon(CupertinoIcons.home), label: 'Home'),
           GlazeNavBarItem(
             child: Icon(CupertinoIcons.photo_camera),
@@ -69,7 +97,6 @@ class _RootState extends State<Root> {
             child: Icon(CupertinoIcons.leaf_arrow_circlepath),
             label: 'Soil',
           ),
-
           GlazeNavBarItem(child: Icon(Icons.smart_toy), label: 'Plant AI'),
         ],
         gradient: LinearGradient(

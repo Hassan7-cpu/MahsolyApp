@@ -7,7 +7,6 @@ import 'package:save_plant/core/functions/validators.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_state.dart';
-import 'package:save_plant/feature/auth/presentation/views/otp_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/signup_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_textformfield.dart';
@@ -45,17 +44,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           if (state is SignInFailure) {
             snackBarMessage(context, state.errMessage, color: Colors.red);
           }
-          if (state is SignInNeedVerification) {
-            snackBarMessage(context, state.message, color: Colors.orange);
-
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (_) => OtpView(email: state.email)),
-            );
-          }
           if (state is SignInSuccess) {
             snackBarMessage(context, "Login successful", color: Colors.green);
-
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (_) => Root()),
@@ -109,15 +99,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     SizedBox(height: 50.h),
                     CustomButtonAuth(
                       onPressed: login,
-                      buttonText: '',
-                      child: state is SignInLoading
-                          ? CircularProgressIndicator(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            )
-                          : Text(
-                              'Login',
-                              style: AppTextStyle.giloryRegular18(context),
-                            ),
+                      buttonText: 'Login',
+                      isLoading: state is SignInLoading,
                     ),
                     SizedBox(height: 15.h),
                     CustomButtonAuth(

@@ -15,7 +15,6 @@ class UserCubit extends Cubit<UserState> {
 
       result.fold(
         (error) {
-          // 👇 لو الحساب مش متفعل
           if (error.contains("Verify your account")) {
             emit(SignInNeedVerification(email: email, message: error));
           } else {
@@ -23,13 +22,17 @@ class UserCubit extends Cubit<UserState> {
           }
         },
         (user) {
-          emit(SignInSuccess());
+          // 🔥 مهم: ما تعملش navigation هنا
+          emit(SignInSuccess(user: user));
         },
       );
     } catch (e) {
       emit(SignInFailure(errMessage: "Something went wrong"));
-      print("❌ Cubit signIn error: $e");
     }
+  }
+
+  void logout() {
+    emit(UserInitial());
   }
 
   // =========================

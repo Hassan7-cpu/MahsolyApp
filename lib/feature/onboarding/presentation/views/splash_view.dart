@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
-import 'package:save_plant/feature/home/presentation/views/home_view.dart';
-import 'package:save_plant/feature/onboarding/presentation/views/onboarding_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
+import 'package:save_plant/feature/onboarding/presentation/views/onboarding_view.dart';
 import 'package:save_plant/root.dart';
 
 class SplashView extends StatefulWidget {
@@ -20,15 +20,20 @@ class _SplashViewState extends State<SplashView> {
     navigate();
   }
 
-  void navigate() async {
-    await Future.delayed(const Duration(seconds: 1));
+  Future<void> navigate() async {
+    await Future.delayed(const Duration(seconds: 2));
 
     if (!mounted) return;
 
     final token = CacheHelper().getData(key: ApiKey.access_token);
-    final seen = CacheHelper().getData(key: "onboardingSeen") == true;
+    final seen = CacheHelper().getData(key: "onboardingSeen") ?? false;
 
-    if (token != null && token.toString().isNotEmpty) {
+    final isLoggedIn =
+        token != null &&
+        token.toString().isNotEmpty &&
+        !JwtDecoder.isExpired(token);
+
+    if (isLoggedIn) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const Root()),
@@ -39,7 +44,7 @@ class _SplashViewState extends State<SplashView> {
     if (!seen) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => OnboardingView()),
+        MaterialPageRoute(builder: (_) => const OnboardingView()),
       );
       return;
     }
@@ -52,6 +57,21 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: Colors.white,
+
+        child: Center(
+          child: Image.asset(
+            "assets/images/logo/logo.png",
+            width: 180,
+            height: 180,
+            fit: BoxFit.contain,
+          ),
+        ),
+      ),
+    );
   }
 }

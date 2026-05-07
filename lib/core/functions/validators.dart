@@ -17,7 +17,7 @@ class Validators {
 
   static String? loginPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "Confirm password is required";
+      return "Password is required";
     }
     return null;
   }

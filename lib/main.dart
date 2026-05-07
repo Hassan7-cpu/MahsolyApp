@@ -11,7 +11,6 @@ import 'package:save_plant/core/theme/cubit/theme_cubit.dart';
 import 'package:save_plant/core/theme/cubit/theme_state.dart';
 import 'package:save_plant/feature/auth/data/repo/user_repository.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_cubit.dart';
-import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
 import 'package:save_plant/feature/onboarding/presentation/views/splash_view.dart';
 
 Future<void> main() async {
@@ -50,7 +49,7 @@ class Mahsoly extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: state.themeMode,
-                home: LoginView(),
+                home: SplashView(),
               );
             },
           );

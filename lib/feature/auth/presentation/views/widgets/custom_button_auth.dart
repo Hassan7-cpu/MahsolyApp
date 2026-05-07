@@ -6,22 +6,22 @@ class CustomButtonAuth extends StatelessWidget {
   const CustomButtonAuth({
     super.key,
     required this.onPressed,
-    this.buttonText,
+    required this.buttonText,
     this.width,
-    this.child,
+    this.isLoading = false,
   });
 
   final VoidCallback? onPressed;
-  final String? buttonText;
+  final String buttonText;
   final double? width;
-  final Widget? child;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: onPressed,
+        onTap: isLoading ? null : onPressed,
         borderRadius: BorderRadius.circular(12.r),
         child: Container(
           alignment: Alignment.center,
@@ -36,9 +36,16 @@ class CustomButtonAuth extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(12.r),
           ),
-          child:
-              child ??
-              Text(buttonText!, style: AppTextStyle.giloryRegular18(context)),
+          child: isLoading
+              ? SizedBox(
+                  height: 20.h,
+                  width: 20.w,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.w,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                )
+              : Text(buttonText, style: AppTextStyle.giloryRegular18(context)),
         ),
       ),
     );
