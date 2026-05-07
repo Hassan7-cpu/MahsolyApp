@@ -14,13 +14,9 @@ class SoilInputView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SoilCubit(SoilRepo(api: DioConsumer(dio: Dio()))),
-      child: SafeArea(
-        bottom: true,
-        top: false,
-        child: Scaffold(
-          appBar: AppBar(title: HeaderSection(title: "Soil Analysis")),
-          body: SoilInputViewBody(),
-        ),
+      child: Scaffold(
+        appBar: AppBar(title: HeaderSection(title: "Soil Analysis")),
+        body: SoilInputViewBody(),
       ),
     );
   }

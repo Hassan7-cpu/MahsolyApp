@@ -78,110 +78,116 @@ class _SoilInputViewBodyState extends State<SoilInputViewBody> {
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 padding: EdgeInsets.all(16.w),
-                child: Column(
-                  children: [
-                    BuildSection(
-                      title: "Nutrients",
-                      children: [
-                        CustomField(
-                          hint: "Nitrogen (N)",
-                          icon: Icons.eco,
-                          controller: nController,
-                          keyboardType: TextInputType.number,
-                          validator: Validators.validateNumber,
-                        ),
-                        CustomField(
-                          hint: "Phosphorous (P)",
-                          icon: Icons.science,
-                          controller: pController,
-                          keyboardType: TextInputType.number,
-                          validator: Validators.validateNumber,
-                        ),
-                        CustomField(
-                          hint: "Potassium (K)",
-                          icon: Icons.grass,
-                          controller: kController,
-                          keyboardType: TextInputType.number,
-                          validator: Validators.validateNumber,
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 16.h),
-
-                    BuildSection(
-                      title: "Environment",
-                      children: [
-                        CustomField(
-                          hint: "Temperature (°C)",
-                          icon: Icons.thermostat,
-                          controller: tempController,
-                          keyboardType: TextInputType.number,
-                          validator: Validators.validateNumber,
-                        ),
-                        CustomField(
-                          hint: "Humidity (%)",
-                          icon: Icons.water_drop,
-                          controller: humidityController,
-                          keyboardType: TextInputType.number,
-                          validator: Validators.validateNumber,
-                        ),
-                        CustomField(
-                          hint: "Rainfall (mm)",
-                          icon: Icons.cloud,
-                          controller: rainfallController,
-                          keyboardType: TextInputType.number,
-                          validator: Validators.validateNumber,
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 16.h),
-
-                    BuildSection(
-                      title: "Soil",
-                      children: [
-                        CustomField(
-                          hint: "pH Value",
-                          icon: Icons.biotech,
-                          controller: phController,
-                          keyboardType: TextInputType.number,
-                          validator: Validators.validateNumber,
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 24.h),
-
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50.h,
-                      child: CustomButton(
-                        buttonText: '',
-                        child: state is SoilLoadingState
-                            ? CircularProgressIndicator(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              )
-                            : Text(
-                                'Analyze',
-                                style: AppTextStyle.giloryRegular18(context),
-                              ),
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {
-                            context.read<SoilCubit>().analyzeSoil(
-                              n: nController.text,
-                              p: pController.text,
-                              k: kController.text,
-                              temp: tempController.text,
-                              humidity: humidityController.text,
-                              ph: phController.text,
-                              rainfall: rainfallController.text,
-                            );
-                          }
-                        },
+                child: SafeArea(
+                  bottom: true,
+                  child: Column(
+                    children: [
+                      BuildSection(
+                        title: "Nutrients",
+                        children: [
+                          CustomField(
+                            hint: "Nitrogen (N)",
+                            icon: Icons.eco,
+                            controller: nController,
+                            keyboardType: TextInputType.number,
+                            validator: Validators.validateNumber,
+                          ),
+                          CustomField(
+                            hint: "Phosphorous (P)",
+                            icon: Icons.science,
+                            controller: pController,
+                            keyboardType: TextInputType.number,
+                            validator: Validators.validateNumber,
+                          ),
+                          CustomField(
+                            hint: "Potassium (K)",
+                            icon: Icons.grass,
+                            controller: kController,
+                            keyboardType: TextInputType.number,
+                            validator: Validators.validateNumber,
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+
+                      SizedBox(height: 16.h),
+
+                      BuildSection(
+                        title: "Environment",
+                        children: [
+                          CustomField(
+                            hint: "Temperature (°C)",
+                            icon: Icons.thermostat,
+                            controller: tempController,
+                            keyboardType: TextInputType.number,
+                            validator: Validators.validateNumber,
+                          ),
+                          CustomField(
+                            hint: "Humidity (%)",
+                            icon: Icons.water_drop,
+                            controller: humidityController,
+                            keyboardType: TextInputType.number,
+                            validator: Validators.validateNumber,
+                          ),
+                          CustomField(
+                            hint: "Rainfall (mm)",
+                            icon: Icons.cloud,
+                            controller: rainfallController,
+                            keyboardType: TextInputType.number,
+                            validator: Validators.validateNumber,
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 16.h),
+
+                      BuildSection(
+                        title: "Soil",
+                        children: [
+                          CustomField(
+                            hint: "pH Value",
+                            icon: Icons.biotech,
+                            controller: phController,
+                            keyboardType: TextInputType.number,
+                            validator: Validators.validateNumber,
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 24.h),
+
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50.h,
+                        child: CustomButton(
+                          buttonText: '',
+                          child: state is SoilLoadingState
+                              ? CircularProgressIndicator(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onPrimary,
+                                )
+                              : Text(
+                                  'Analyze',
+                                  style: AppTextStyle.giloryRegular18(context),
+                                ),
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              context.read<SoilCubit>().analyzeSoil(
+                                n: nController.text,
+                                p: pController.text,
+                                k: kController.text,
+                                temp: tempController.text,
+                                humidity: humidityController.text,
+                                ph: phController.text,
+                                rainfall: rainfallController.text,
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 20.h),
+                    ],
+                  ),
                 ),
               ),
             ),
