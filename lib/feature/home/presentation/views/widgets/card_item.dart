@@ -10,11 +10,6 @@ class CardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-
-    final cardWidth = (width - 48) / 2;
-    final imageHeight = height * 0.18;
-    final aspectRatio = cardWidth / imageHeight;
 
     return GestureDetector(
       onTap: () {
@@ -31,30 +26,31 @@ class CardItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(8.r)),
-              child: AspectRatio(
-                aspectRatio: aspectRatio,
-                child: Image(image: item.image, fit: BoxFit.cover),
+            Expanded(
+              flex: 4,
+              child: ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(8.r)),
+                child: Image(
+                  image: item.image,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
               ),
             ),
             SizedBox(height: 6.h),
-            Padding(
-              padding: EdgeInsets.all(8.r),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.name,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: width * 0.04,
-                      fontWeight: FontWeight.bold,
-                    ),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.r),
+                child: Text(
+                  item.name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
                   ),
-                  SizedBox(height: 4.h),
-                ],
+                ),
               ),
             ),
           ],

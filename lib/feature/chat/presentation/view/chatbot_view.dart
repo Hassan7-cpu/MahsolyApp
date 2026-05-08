@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
+import 'package:save_plant/core/widgets/header_section.dart';
 import 'package:save_plant/feature/chat/data/repo/message_repo.dart';
 import 'package:save_plant/feature/chat/presentation/cubit/chat_cubit.dart';
 import 'package:save_plant/feature/chat/presentation/view/widgets/chatbot_view_body.dart';
@@ -18,7 +19,10 @@ class ChatbotView extends StatelessWidget {
         bottom: true,
         top: false,
         child: Scaffold(
-          appBar: AppBar(title: Text("Chatbot")),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: HeaderSection(title: 'Chatbot'),
+          ),
           body: ChatBotViewBody(),
         ),
       ),

@@ -21,14 +21,14 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(
               Icons.dashboard,
               size: 28.sp,
-              color: AppColor.primaryColor,
+              color: Theme.of(context).colorScheme.onBackground,
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
             title: Text(
               "Dashboard",
               style: AppTextStyle.giloryRegular18(
                 context,
-              ).copyWith(color: AppColor.primaryColor),
+              ).copyWith(color: Theme.of(context).colorScheme.onBackground),
             ),
             onTap: () {
               Navigator.push(
@@ -41,14 +41,14 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(
               Icons.settings,
               size: 28.sp,
-              color: AppColor.primaryColor,
+              color: Theme.of(context).colorScheme.onBackground,
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
             title: Text(
               "Settings",
               style: AppTextStyle.giloryRegular18(
                 context,
-              ).copyWith(color: AppColor.primaryColor),
+              ).copyWith(color: Theme.of(context).colorScheme.onBackground),
             ),
             onTap: () {
               Navigator.push(

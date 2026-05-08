@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_plant/core/networking/dio_consumer.dart';
+import 'package:save_plant/core/widgets/header_section.dart';
 import 'package:save_plant/feature/auth/data/repo/otp_repository.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/otp_cubit.dart';
-import 'package:save_plant/feature/auth/presentation/views/widgets/header_section.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/otp_view_body.dart';
 
 class OtpView extends StatelessWidget {

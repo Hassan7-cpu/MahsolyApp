@@ -85,7 +85,11 @@ class _RootState extends State<Root> {
           setState(() {
             currentPage = index;
           });
-          pageController.jumpToPage(index);
+          pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.decelerate,
+          );
         },
         items: const [
           GlazeNavBarItem(child: Icon(CupertinoIcons.home), label: 'Home'),

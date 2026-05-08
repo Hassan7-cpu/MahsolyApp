@@ -213,9 +213,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
-                childAspectRatio: 0.77,
+                crossAxisSpacing: 4.w,
+                mainAxisSpacing: 4.h,
+                childAspectRatio: 0.65.r,
               ),
               itemCount: filteredItems.length,
               itemBuilder: (context, index) {

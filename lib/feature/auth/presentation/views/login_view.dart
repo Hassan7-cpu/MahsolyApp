@@ -5,11 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_plant/core/constants/app_assets.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/theme/text_style.dart';
+import 'package:save_plant/core/widgets/header_section.dart';
 import 'package:save_plant/feature/auth/data/repo/user_repository.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_textformfield.dart';
-import 'package:save_plant/feature/auth/presentation/views/widgets/header_section.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/login_view_body.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/text_description.dart';
 
@@ -28,7 +28,7 @@ class _LoginViewState extends State<LoginView> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: HeaderSection(image: AppAssets.logo, title: "Mahsoly"),
+          title: HeaderSection(title: "Mahsoly"),
         ),
         body: LoginViewBody(),
       ),

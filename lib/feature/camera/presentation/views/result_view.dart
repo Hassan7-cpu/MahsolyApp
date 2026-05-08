@@ -3,9 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:save_plant/core/functions/app_decoration.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/widgets/custom_button.dart';
-import 'package:save_plant/feature/auth/presentation/views/widgets/header_section.dart';
+import 'package:save_plant/core/widgets/header_section.dart';
 import 'package:save_plant/feature/camera/data/model/scan_model.dart';
 import 'package:save_plant/feature/camera/presentation/views/camera_view.dart';
+import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
 
 class ResultView extends StatelessWidget {
   final ScanModel data;
@@ -125,7 +126,6 @@ class ResultView extends StatelessWidget {
                   ),
                 ),
               ),
-
               CustomButton(
                 onPressed: () {
                   Navigator.pushReplacement(

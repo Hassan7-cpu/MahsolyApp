@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
-import 'package:save_plant/core/constants/app_assets.dart';
-import 'package:save_plant/feature/auth/presentation/views/widgets/header_section.dart';
+import 'package:save_plant/core/widgets/header_section.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/signup_view_body.dart';
 
 class SignupView extends StatefulWidget {
@@ -18,9 +17,7 @@ class _SignupViewState extends State<SignupView> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-          title: HeaderSection(image: AppAssets.logo, title: "Mahsoly"),
-        ),
+        appBar: AppBar(title: HeaderSection(title: "Mahsoly")),
         body: SignupViewBody(),
       ),
     );

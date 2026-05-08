@@ -7,8 +7,6 @@ import 'package:save_plant/core/functions/snackbar_message.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/confirm_email_otp_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/confirm_email_otp_state.dart';
-import 'package:save_plant/feature/auth/presentation/cubit/otp_cubit.dart';
-import 'package:save_plant/feature/auth/presentation/cubit/otp_state.dart';
 import 'package:save_plant/feature/auth/presentation/views/setting_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 
@@ -17,6 +15,12 @@ class ConfirmEmailViewBody extends StatelessWidget {
   final String email;
 
   final TextEditingController otpController = TextEditingController();
+  void verifyOtp(BuildContext context) {
+    context.read<EmailOtpCubit>().verifyOtp(
+      email: email,
+      otp: otpController.text.trim(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,14 +79,7 @@ class ConfirmEmailViewBody extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: CustomButtonAuth(
-                  onPressed: state is EmailOtpLoading
-                      ? null
-                      : () {
-                          context.read<EmailOtpCubit>().verifyOtp(
-                            email: email,
-                            otp: otpController.text.trim(),
-                          );
-                        },
+                  onPressed: () => verifyOtp(context),
                   buttonText: 'Verify',
                   isLoading: state is EmailOtpLoading,
                 ),
