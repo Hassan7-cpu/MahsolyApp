@@ -4,13 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/functions/snackbar_message.dart';
 import 'package:save_plant/core/functions/validators.dart';
-import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/widgets/custom_button.dart';
 import 'package:save_plant/feature/soil_input/presentation/cubit/soil_cubit.dart';
 import 'package:save_plant/feature/soil_input/presentation/cubit/soil_state.dart';
 import 'package:save_plant/feature/soil_input/presentation/view/crop_result_view.dart';
-import 'package:save_plant/feature/soil_input/presentation/view/widgets/build_section.dart';
-import 'package:save_plant/feature/soil_input/presentation/view/widgets/custom_field.dart';
+import 'package:save_plant/core/widgets/build_section.dart';
+import 'package:save_plant/core/widgets/custom_field.dart';
 
 class SoilInputViewBody extends StatefulWidget {
   const SoilInputViewBody({super.key});
@@ -63,7 +62,10 @@ class _SoilInputViewBodyState extends State<SoilInputViewBody> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CropResultView(crop: state.data),
+              builder: (context) => CropResultView(
+                crop: state.crop,
+                explanation: state.explanation,
+              ),
             ),
           );
         } else if (state is SoilErrorState) {
@@ -90,21 +92,21 @@ class _SoilInputViewBodyState extends State<SoilInputViewBody> {
                             icon: Icons.eco,
                             controller: nController,
                             keyboardType: TextInputType.number,
-                            validator: Validators.validateNumber,
+                            validator: FarmValidators.validateNitrogen,
                           ),
                           CustomField(
                             hint: "Phosphorous (P)",
                             icon: Icons.science,
                             controller: pController,
                             keyboardType: TextInputType.number,
-                            validator: Validators.validateNumber,
+                            validator: FarmValidators.validatePhosphorous,
                           ),
                           CustomField(
                             hint: "Potassium (K)",
                             icon: Icons.grass,
                             controller: kController,
                             keyboardType: TextInputType.number,
-                            validator: Validators.validateNumber,
+                            validator: FarmValidators.validatePotassium,
                           ),
                         ],
                       ),
@@ -119,21 +121,21 @@ class _SoilInputViewBodyState extends State<SoilInputViewBody> {
                             icon: Icons.thermostat,
                             controller: tempController,
                             keyboardType: TextInputType.number,
-                            validator: Validators.validateNumber,
+                            validator: FarmValidators.validateTemperature,
                           ),
                           CustomField(
                             hint: "Humidity (%)",
                             icon: Icons.water_drop,
                             controller: humidityController,
                             keyboardType: TextInputType.number,
-                            validator: Validators.validateNumber,
+                            validator: FarmValidators.validateHumidity,
                           ),
                           CustomField(
                             hint: "Rainfall (mm)",
                             icon: Icons.cloud,
                             controller: rainfallController,
                             keyboardType: TextInputType.number,
-                            validator: Validators.validateNumber,
+                            validator: FarmValidators.validateRainfall,
                           ),
                         ],
                       ),
@@ -148,44 +150,30 @@ class _SoilInputViewBodyState extends State<SoilInputViewBody> {
                             icon: Icons.biotech,
                             controller: phController,
                             keyboardType: TextInputType.number,
-                            validator: Validators.validateNumber,
+                            validator: FarmValidators.validatePH,
                           ),
                         ],
                       ),
 
                       SizedBox(height: 24.h),
-
-                      SizedBox(
-                        width: double.infinity,
-                        height: 50.h,
-                        child: CustomButton(
-                          buttonText: '',
-                          child: state is SoilLoadingState
-                              ? CircularProgressIndicator(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.onPrimary,
-                                )
-                              : Text(
-                                  'Analyze',
-                                  style: AppTextStyle.giloryRegular18(context),
-                                ),
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              context.read<SoilCubit>().analyzeSoil(
-                                n: nController.text,
-                                p: pController.text,
-                                k: kController.text,
-                                temp: tempController.text,
-                                humidity: humidityController.text,
-                                ph: phController.text,
-                                rainfall: rainfallController.text,
-                              );
-                            }
-                          },
-                        ),
+                      CustomButton(
+                        buttonText: 'Analyze',
+                        isLoading: state is SoilLoadingState,
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<SoilCubit>().analyzeSoil(
+                              n: nController.text,
+                              p: pController.text,
+                              k: kController.text,
+                              temp: tempController.text,
+                              humidity: humidityController.text,
+                              ph: phController.text,
+                              rainfall: rainfallController.text,
+                            );
+                          }
+                        },
                       ),
-                      SizedBox(height: 20.h),
+                      SizedBox(height: 25.h),
                     ],
                   ),
                 ),

@@ -5,9 +5,10 @@ class InitialState extends SoilState {}
 class SoilLoadingState extends SoilState {}
 
 class SoilSuccessState extends SoilState {
-  final String data;
+  final String crop;
+  final String explanation;
 
-  SoilSuccessState({required this.data});
+  SoilSuccessState({required this.crop, required this.explanation});
 }
 
 class SoilErrorState extends SoilState {

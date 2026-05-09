@@ -1,12 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/functions/snackbar_message.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/functions/validators.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/setting_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/setting_state.dart';
+import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_textformfield.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 
@@ -35,14 +37,19 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SettingCubit, SettingState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is ChangePasswordSuccess) {
+          await CacheHelper().clearData();
           snackBarMessage(
             context,
             "Password changed successfully",
             color: AppColor.primaryColor,
           );
-          Navigator.pop(context);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => LoginView()),
+            (route) => false,
+          );
         }
 
         if (state is ChangePasswordFailure) {

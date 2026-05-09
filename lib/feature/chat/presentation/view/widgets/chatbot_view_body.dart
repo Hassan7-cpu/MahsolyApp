@@ -70,7 +70,7 @@ class _ChatBotViewBodyState extends State<ChatBotViewBody> {
                 ),
               ),
             Padding(
-              padding: EdgeInsets.all(10.sp),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
               child: Row(
                 children: [
                   Expanded(

@@ -7,6 +7,11 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: AppTextStyle.giloryBold24(context));
+    return Text(
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      title,
+      style: AppTextStyle.giloryBold24(context),
+    );
   }
 }

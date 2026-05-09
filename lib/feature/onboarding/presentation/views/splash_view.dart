@@ -19,8 +19,7 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
-  late AnimationController textController;
-  late AnimationController imageController;
+  late AnimationController controller;
 
   late Animation<Offset> textAnimation;
   late Animation<Offset> imageAnimation;
@@ -28,16 +27,13 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   String displayedText = "";
   final String fullText = "Mahsoly";
 
+  Timer? timer;
+
   @override
   void initState() {
     super.initState();
 
-    textController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
-
-    imageController = AnimationController(
+    controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     );
@@ -45,18 +41,14 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     textAnimation = Tween<Offset>(
       begin: const Offset(0, -2),
       end: Offset.zero,
-    ).animate(CurvedAnimation(parent: textController, curve: Curves.easeOut));
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
 
     imageAnimation = Tween<Offset>(
       begin: const Offset(0, 2),
       end: Offset.zero,
-    ).animate(CurvedAnimation(parent: imageController, curve: Curves.easeOut));
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
 
-    textController.forward();
-
-    Future.delayed(const Duration(milliseconds: 300), () {
-      imageController.forward();
-    });
+    controller.forward();
 
     typeWriterEffect();
 
@@ -64,7 +56,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   }
 
   void typeWriterEffect() {
-    Timer.periodic(const Duration(seconds: 5), (timer) {
+    timer = Timer.periodic(const Duration(milliseconds: 150), (timer) {
       if (displayedText.length < fullText.length) {
         setState(() {
           displayedText = fullText.substring(0, displayedText.length + 1);
@@ -81,6 +73,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     if (!mounted) return;
 
     final token = CacheHelper().getData(key: ApiKey.access_token);
+
     final seen = CacheHelper().getData(key: "onboardingSeen") ?? false;
 
     final isLoggedIn =
@@ -112,8 +105,8 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    textController.dispose();
-    imageController.dispose();
+    timer?.cancel();
+    controller.dispose();
     super.dispose();
   }
 
@@ -134,7 +127,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
               ),
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
 
             SlideTransition(
               position: imageAnimation,

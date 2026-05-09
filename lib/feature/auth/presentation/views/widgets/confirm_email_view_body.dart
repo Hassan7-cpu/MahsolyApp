@@ -7,7 +7,7 @@ import 'package:save_plant/core/functions/snackbar_message.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/confirm_email_otp_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/confirm_email_otp_state.dart';
-import 'package:save_plant/feature/auth/presentation/views/setting_view.dart';
+import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 
 class ConfirmEmailViewBody extends StatelessWidget {
@@ -37,7 +37,7 @@ class ConfirmEmailViewBody extends StatelessWidget {
             CacheHelper().saveData(key: 'email', value: email);
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (_) => SettingView()),
+              MaterialPageRoute(builder: (_) => LoginView()),
               (route) => false,
             );
           }

@@ -4,15 +4,15 @@ import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/widgets/header_section.dart';
 
-class CropResultView extends StatelessWidget {
-  final String crop;
-  final String explanation;
-
-  const CropResultView({
+class FertilizerResultView extends StatelessWidget {
+  const FertilizerResultView({
     super.key,
-    required this.crop,
+    required this.fertilizer,
     required this.explanation,
   });
+
+  final String fertilizer;
+  final String explanation;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class CropResultView extends StatelessWidget {
                   SizedBox(height: 15.h),
 
                   Text(
-                    "Recommended Crop",
+                    "Recommended Fertilizer",
                     style: AppTextStyle.giloryRegular16(
                       context,
                     ).copyWith(color: Theme.of(context).colorScheme.surface),
@@ -52,24 +52,21 @@ class CropResultView extends StatelessWidget {
                   SizedBox(height: 10.h),
 
                   Text(
-                    crop.toUpperCase(),
+                    fertilizer,
                     textAlign: TextAlign.center,
                     style: AppTextStyle.giloryBold30(context),
                   ),
                 ],
               ),
             ),
-
             SizedBox(height: 25.h),
-
-            /// EXPLANATION CARD
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(20.r),
-                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10.r)],
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,9 +84,7 @@ class CropResultView extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   SizedBox(height: 15.h),
-
                   Text(
                     explanation,
                     style: AppTextStyle.giloryRegular14(context),

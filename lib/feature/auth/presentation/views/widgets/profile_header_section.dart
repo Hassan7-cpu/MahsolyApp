@@ -71,7 +71,6 @@ class _ProfileHeaderCardState extends State<ProfileHeaderCard> {
           ),
 
           SizedBox(height: 16.h),
-
           Row(
             children: [
               Stack(
@@ -90,7 +89,7 @@ class _ProfileHeaderCardState extends State<ProfileHeaderCard> {
                     child: Container(
                       padding: EdgeInsets.all(6.r),
                       decoration: const BoxDecoration(
-                        color: Colors.green,
+                        color: AppColor.primaryColor,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(

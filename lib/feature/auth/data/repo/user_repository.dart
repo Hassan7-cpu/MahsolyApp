@@ -27,32 +27,34 @@ class UserRepository {
       if (data[ApiKey.access_token] == null ||
           data[ApiKey.access_token].toString().isEmpty) {
         final serverMsg =
-            data[ApiKey.detail]?.toString() ??
-            data['message']?.toString() ??
-            'Please enter a valid email and password';
+            data[ApiKey.detail]?.toString() ?? 'Invalid credentials';
+
         return Left(serverMsg);
       }
+
       final user = SignInModel.fromJson(data);
       final token = user.token;
+
       if (token == null || token.isEmpty) {
         return Left("Invalid token");
       }
 
-      final decodedToken = JwtDecoder.decode(token);
-      final userId = decodedToken['sub']?.toString() ?? '';
+      final decoded = JwtDecoder.decode(token);
+      final userId = decoded['sub']?.toString() ?? '';
+
+      // clean old cache first (important)
+      await CacheHelper().clearData();
 
       await CacheHelper().saveData(key: ApiKey.access_token, value: token);
-      await CacheHelper().saveData(key: ApiKey.email, value: email);
-      await CacheHelper().saveData(key: ApiKey.id, value: userId);
 
-      print(" TOKEN: $token");
-      print(" USER ID: $userId");
+      await CacheHelper().saveData(key: ApiKey.email, value: email);
+
+      await CacheHelper().saveData(key: ApiKey.id, value: userId);
 
       return Right(user);
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);
     } catch (e) {
-      print(" signIn error: $e");
       return Left("Something went wrong");
     }
   }

@@ -8,6 +8,7 @@ class Endpoints {
   static String confirmOtp = "auth/confirm-email-otp";
   static String uploadImage = "scan";
   static String predictCrop = "predict-crop";
+  static String predictFertilizer = "fertilizer-recommendation";
 }
 
 //دي الحاجات الي في ال response

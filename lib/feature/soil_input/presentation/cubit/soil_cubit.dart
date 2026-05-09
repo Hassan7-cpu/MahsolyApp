@@ -33,7 +33,7 @@ class SoilCubit extends Cubit<SoilState> {
         emit(SoilErrorState(errorMessage: error.errorMessage));
       },
       (data) {
-        emit(SoilSuccessState(data: data.crop));
+        emit(SoilSuccessState(crop: data.crop, explanation: data.explanation));
       },
     );
   }

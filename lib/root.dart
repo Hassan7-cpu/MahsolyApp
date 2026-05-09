@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:glaze_nav_bar/glaze_nav_bar.dart';
+
 import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
+
 import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
 import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
 import 'package:save_plant/feature/chat/presentation/view/chatbot_view.dart';
 import 'package:save_plant/feature/home/presentation/views/home_view.dart';
 import 'package:save_plant/feature/soil_input/presentation/view/soil_input_view.dart';
+import 'package:save_plant/feature/fertilizer_input/presentation/view/fertilizer_recommendation_view.dart';
 
 class Root extends StatefulWidget {
   const Root({super.key});
@@ -33,6 +36,7 @@ class _RootState extends State<Root> {
       const HomeView(),
       const PhotoTipsView(),
       const SoilInputView(),
+      const FertilizerRecommendationView(),
       const ChatbotView(),
     ];
 
@@ -67,6 +71,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+
       body: PageView(
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
@@ -81,33 +86,52 @@ class _RootState extends State<Root> {
       bottomNavigationBar: GlazeNavBar(
         backgroundColor: Colors.transparent,
         index: currentPage,
+
         onTap: (index) {
           setState(() {
             currentPage = index;
           });
+
           pageController.animateToPage(
             index,
             duration: const Duration(milliseconds: 300),
             curve: Curves.decelerate,
           );
         },
+
         items: const [
-          GlazeNavBarItem(child: Icon(CupertinoIcons.home), label: 'Home'),
           GlazeNavBarItem(
-            child: Icon(CupertinoIcons.photo_camera),
-            label: 'Camera',
+            child: Icon(CupertinoIcons.house_fill),
+            label: 'Home',
           ),
+
           GlazeNavBarItem(
-            child: Icon(CupertinoIcons.leaf_arrow_circlepath),
-            label: 'Soil',
+            child: Icon(CupertinoIcons.camera_fill),
+            label: 'Scan Plant',
           ),
-          GlazeNavBarItem(child: Icon(Icons.smart_toy), label: 'Plant AI'),
+
+          GlazeNavBarItem(
+            child: Icon(Icons.spa_rounded),
+            label: 'Soil Analysis',
+          ),
+
+          GlazeNavBarItem(
+            child: Icon(Icons.grass_rounded),
+            label: 'Fertilizer AI',
+          ),
+
+          GlazeNavBarItem(
+            child: Icon(Icons.smart_toy_rounded),
+            label: 'AI Chat',
+          ),
         ],
+
         gradient: LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
           colors: [AppColor.primaryColor, AppColor.secondaryColor],
         ),
+
         buttonGradient: LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
