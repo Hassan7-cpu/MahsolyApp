@@ -42,7 +42,6 @@ class UserRepository {
       final decoded = JwtDecoder.decode(token);
       final userId = decoded['sub']?.toString() ?? '';
 
-      // clean old cache first (important)
       await CacheHelper().clearData();
 
       await CacheHelper().saveData(key: ApiKey.access_token, value: token);
@@ -74,7 +73,7 @@ class UserRepository {
         },
       );
       final signUPModel = SignUpModel.fromJson(response);
-      await CacheHelper().saveData(key: 'name', value: name);
+      await CacheHelper().saveData(key: ApiKey.name, value: name);
       return Right(signUPModel);
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);

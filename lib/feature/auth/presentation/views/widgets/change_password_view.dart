@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/functions/snackbar_message.dart';
 import 'package:save_plant/core/theme/text_style.dart';
@@ -39,7 +38,6 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
     return BlocConsumer<SettingCubit, SettingState>(
       listener: (context, state) async {
         if (state is ChangePasswordSuccess) {
-          await CacheHelper().clearData();
           snackBarMessage(
             context,
             "Password changed successfully",
@@ -81,7 +79,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                     suffixIcon: Icons.visibility,
                     obscureText: true,
                     keyboardType: TextInputType.visiblePassword,
-                    validator: Validators.loginPasswordValidator,
+                    validator: Validators.passwordValidator,
                   ),
 
                   SizedBox(height: 20.h),

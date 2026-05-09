@@ -99,6 +99,7 @@ class DioConsumer extends ApiConsumer {
     }
   }
 
+  @override
   Future put(
     String url, {
     dynamic data,

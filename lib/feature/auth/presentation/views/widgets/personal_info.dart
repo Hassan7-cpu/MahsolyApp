@@ -33,13 +33,11 @@ class _PersonalInfoCardState extends State<PersonalInfoCard> {
     return BlocConsumer<SettingCubit, SettingState>(
       listener: (context, state) async {
         if (state is ChangeEmailSuccess) {
-          await CacheHelper().clearData();
           snackBarMessage(
             context,
             "Email updated successfully",
             color: AppColor.primaryColor,
           );
-
           Navigator.push(
             context,
             MaterialPageRoute(

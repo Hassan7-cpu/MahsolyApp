@@ -14,17 +14,12 @@ class SettingRepository {
     try {
       final token = CacheHelper().getData(key: ApiKey.access_token);
 
-      final response = await api.post(
+      await api.post(
         Endpoints.ChangeEmail,
         data: {"new_email": newemail},
         options: Options(headers: {"Authorization": "Bearer $token"}),
       );
 
-      if (response == null) {
-        return const Left("Unexpected error");
-      }
-
-      // sync cache
       await CacheHelper().saveData(key: ApiKey.email, value: newemail);
 
       return const Right(null);
@@ -41,8 +36,6 @@ class SettingRepository {
     required String confirmNewPassword,
   }) async {
     try {
-      final token = CacheHelper().getData(key: ApiKey.access_token);
-
       final response = await api.put(
         Endpoints.changePassword,
         data: {
@@ -50,7 +43,6 @@ class SettingRepository {
           "new_password": newPassword,
           "confirm_new_password": confirmNewPassword,
         },
-        options: Options(headers: {"Authorization": "Bearer $token"}),
       );
 
       if (response == null) {

@@ -14,8 +14,7 @@ import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button
 import 'package:save_plant/feature/auth/presentation/views/widgets/personal_info.dart';
 
 class ProfileHeaderCard extends StatefulWidget {
-  const ProfileHeaderCard({super.key, required this.name});
-  final String name;
+  const ProfileHeaderCard({super.key});
 
   @override
   State<ProfileHeaderCard> createState() => _ProfileHeaderCardState();
@@ -29,10 +28,34 @@ class _ProfileHeaderCardState extends State<ProfileHeaderCard> {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
+      final File tempImage = File(pickedFile.path);
+
+      await CacheHelper().saveData(key: "profile_image", value: tempImage.path);
+
       setState(() {
-        _image = File(pickedFile.path);
+        _image = tempImage;
       });
     }
+  }
+
+  Future<void> _loadImage() async {
+    final path = CacheHelper().getData(key: "profile_image");
+
+    if (path != null) {
+      final file = File(path);
+
+      if (await file.exists()) {
+        setState(() {
+          _image = file;
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadImage();
   }
 
   Future<void> logout() async {
@@ -71,54 +94,40 @@ class _ProfileHeaderCardState extends State<ProfileHeaderCard> {
           ),
 
           SizedBox(height: 16.h),
-          Row(
+
+          Stack(
+            alignment: Alignment.bottomRight,
             children: [
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  CircleAvatar(
-                    radius: 50.r,
-                    backgroundColor: Colors.grey.shade200,
-                    backgroundImage: _image != null ? FileImage(_image!) : null,
-                    child: _image == null
-                        ? Icon(Icons.person, size: 50.sp, color: Colors.grey)
-                        : null,
-                  ),
-                  GestureDetector(
-                    onTap: _pickImage,
-                    child: Container(
-                      padding: EdgeInsets.all(6.r),
-                      decoration: const BoxDecoration(
-                        color: AppColor.primaryColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.camera_alt,
-                        size: 22.sp,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
+              CircleAvatar(
+                radius: 50.r,
+                backgroundColor: Colors.grey.shade200,
+                backgroundImage: _image != null ? FileImage(_image!) : null,
+                child: _image == null
+                    ? Icon(Icons.person, size: 50.sp, color: Colors.grey)
+                    : null,
               ),
-
-              SizedBox(width: 16.w),
-
-              Expanded(
-                child: Text(
-                  widget.name,
-                  style: AppTextStyle.giloryBold18(context),
+              GestureDetector(
+                onTap: _pickImage,
+                child: Container(
+                  padding: EdgeInsets.all(6.r),
+                  decoration: const BoxDecoration(
+                    color: AppColor.primaryColor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.camera_alt,
+                    size: 22.sp,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
           ),
-
           SizedBox(height: 20.h),
 
           PersonalInfoCard(),
 
           SizedBox(height: 20.h),
-
           CustomButtonAuth(buttonText: 'Logout', onPressed: logout),
         ],
       ),
