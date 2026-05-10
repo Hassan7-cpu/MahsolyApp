@@ -97,12 +97,6 @@ class ResultView extends StatelessWidget {
                           style: AppTextStyle.giloryBold22(context),
                         ),
                         SizedBox(height: 12.h),
-                        Text(
-                          "confidence: ${(data.confidence * 100).toStringAsFixed(2)}%",
-                          style: AppTextStyle.giloryBold22(context),
-                        ),
-                        SizedBox(height: 12.h),
-
                         Container(
                           width: double.infinity,
                           padding: EdgeInsets.all(12.r),
