@@ -59,6 +59,7 @@ class _SoilInputViewBodyState extends State<SoilInputViewBody> {
       listener: (context, state) {
         if (state is SoilSuccessState) {
           snackBarMessage(context, 'Suscess', color: AppColor.primaryColor);
+          resetForm();
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -67,7 +68,9 @@ class _SoilInputViewBodyState extends State<SoilInputViewBody> {
                 explanation: state.explanation,
               ),
             ),
-          );
+          ).then((_) {
+            resetForm();
+          });
         } else if (state is SoilErrorState) {
           snackBarMessage(context, state.errorMessage, color: Colors.red);
         }
@@ -162,13 +165,13 @@ class _SoilInputViewBodyState extends State<SoilInputViewBody> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             context.read<SoilCubit>().analyzeSoil(
-                              n: nController.text,
-                              p: pController.text,
-                              k: kController.text,
-                              temp: tempController.text,
-                              humidity: humidityController.text,
-                              ph: phController.text,
-                              rainfall: rainfallController.text,
+                              n: nController.text.trim(),
+                              p: pController.text.trim(),
+                              k: kController.text.trim(),
+                              temp: tempController.text.trim(),
+                              humidity: humidityController.text.trim(),
+                              ph: phController.text.trim(),
+                              rainfall: rainfallController.text.trim(),
                             );
                           }
                         },

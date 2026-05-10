@@ -47,12 +47,37 @@ class _FertilizerRecommendationViewBodyState
     super.dispose();
   }
 
+  String capitalizeIfNeeded(String text) {
+    final trimmed = text.trim();
+    if (trimmed.isEmpty) return trimmed;
+
+    if (trimmed == trimmed.toUpperCase()) return trimmed;
+
+    return trimmed[0].toUpperCase() + trimmed.substring(1);
+  }
+
+  void resetForm() {
+    formKey.currentState?.reset();
+
+    tempController.clear();
+    humidityController.clear();
+    moistureController.clear();
+    nitrogenController.clear();
+    potassiumController.clear();
+    phosphorousController.clear();
+    soilTypeController.clear();
+    cropTypeController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<FertilizerCubit, FertilizerState>(
       listener: (context, state) {
         if (state is FertilizerSuccess) {
-          snackBarMessage(context, 'Suscess', color: AppColor.primaryColor);
+          snackBarMessage(context, 'Success', color: AppColor.primaryColor);
+
+          resetForm();
+
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -61,10 +86,10 @@ class _FertilizerRecommendationViewBodyState
                 explanation: state.explanation,
               ),
             ),
-          );
-        }
-
-        if (state is FertilizerError) {
+          ).then((_) {
+            resetForm();
+          });
+        } else if (state is FertilizerError) {
           snackBarMessage(context, state.message, color: Colors.red);
         }
       },
@@ -165,18 +190,19 @@ class _FertilizerRecommendationViewBodyState
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         context.read<FertilizerCubit>().predictFertilizer(
-                          temperature: tempController.text,
-                          humidity: humidityController.text,
-                          moisture: moistureController.text,
-                          soilType: soilTypeController.text,
-                          cropType: cropTypeController.text,
-                          nitrogen: nitrogenController.text,
-                          potassium: potassiumController.text,
-                          phosphorous: phosphorousController.text,
+                          temperature: tempController.text.trim(),
+                          humidity: humidityController.text.trim(),
+                          moisture: moistureController.text.trim(),
+                          soilType: capitalizeIfNeeded(soilTypeController.text),
+                          cropType: capitalizeIfNeeded(cropTypeController.text),
+                          nitrogen: nitrogenController.text.trim(),
+                          potassium: potassiumController.text.trim(),
+                          phosphorous: phosphorousController.text.trim(),
                         );
                       }
                     },
                   ),
+
                   SizedBox(height: 25.h),
                 ],
               ),
