@@ -6,7 +6,6 @@ import 'package:save_plant/core/widgets/custom_button.dart';
 import 'package:save_plant/core/widgets/header_section.dart';
 import 'package:save_plant/feature/camera/data/model/scan_model.dart';
 import 'package:save_plant/feature/camera/presentation/views/camera_view.dart';
-import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
 
 class ResultView extends StatelessWidget {
   final ScanModel data;
@@ -15,12 +14,12 @@ class ResultView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isError = data.diseaseName.isEmpty;
+    final isError = data.diseaseName.isEmpty || data.confidence < 0.5;
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: HeaderSection(title: "Analysis Result"),
+        title: const HeaderSection(title: "Analysis Result"),
       ),
       body: SafeArea(
         child: Padding(
@@ -65,12 +64,12 @@ class ResultView extends StatelessWidget {
                                 ),
                         ),
                       ),
-
                       SizedBox(height: 16.h),
-
                       if (isError) ...[
                         Text(
-                          data.message,
+                          data.diseaseName.isEmpty
+                              ? data.message
+                              : "Low confidence result, please try again",
                           style: AppTextStyle.giloryBold22(
                             context,
                           ).copyWith(color: Colors.red),
@@ -97,7 +96,11 @@ class ResultView extends StatelessWidget {
                           data.plantName,
                           style: AppTextStyle.giloryBold22(context),
                         ),
-
+                        SizedBox(height: 12.h),
+                        Text(
+                          "confidence: ${(data.confidence * 100).toStringAsFixed(2)}%",
+                          style: AppTextStyle.giloryBold22(context),
+                        ),
                         SizedBox(height: 12.h),
 
                         Container(
@@ -108,24 +111,12 @@ class ResultView extends StatelessWidget {
                           ).copyWith(color: Colors.red.shade200),
                           child: Text("Disease: ${data.diseaseName}"),
                         ),
-
-                        SizedBox(height: 12.h),
-
-                        Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(12.r),
-                          decoration: AppDecoration.card(
-                            context,
-                          ).copyWith(color: Colors.blue.shade200),
-                          child: Text(
-                            "Confidence: ${(data.confidence * 100).toStringAsFixed(1)}%",
-                          ),
-                        ),
                       ],
                     ],
                   ),
                 ),
               ),
+
               CustomButton(
                 onPressed: () {
                   Navigator.pushReplacement(

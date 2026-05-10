@@ -159,8 +159,8 @@ class FarmValidators {
       return "Enter valid potassium";
     }
 
-    if (number < 0 || number > 20) {
-      return "Potassium must be between 0 and 20";
+    if (number < 0 || number > 40) {
+      return "Potassium must be between 0 and 40";
     }
 
     return null;
@@ -177,8 +177,8 @@ class FarmValidators {
       return "Enter valid phosphorous";
     }
 
-    if (number < 0 || number > 45) {
-      return "Phosphorous must be between 0 and 45";
+    if (number < 0 || number > 100) {
+      return "Phosphorous must be between 0 and 100";
     }
 
     return null;

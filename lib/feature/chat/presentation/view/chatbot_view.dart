@@ -21,7 +21,7 @@ class ChatbotView extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: HeaderSection(title: 'Chatbot'),
+            title: HeaderSection(title: 'Mahsoly Bot'),
           ),
           body: ChatBotViewBody(),
         ),

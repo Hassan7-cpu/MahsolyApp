@@ -35,13 +35,14 @@ class _PersonalInfoCardState extends State<PersonalInfoCard> {
         if (state is ChangeEmailSuccess) {
           snackBarMessage(
             context,
-            "Email updated successfully",
+            "OTP sent to your new email",
             color: AppColor.primaryColor,
           );
+
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => ConfirmEmailView(email: state.email),
+              builder: (_) => ConfirmEmailView(email: state.email.trim()),
             ),
           );
         }

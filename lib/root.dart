@@ -107,17 +107,14 @@ class _RootState extends State<Root> {
 
           GlazeNavBarItem(
             child: Icon(CupertinoIcons.camera_fill),
-            label: 'Scan Plant',
+            label: 'Scan',
           ),
 
-          GlazeNavBarItem(
-            child: Icon(Icons.spa_rounded),
-            label: 'Soil Analysis',
-          ),
+          GlazeNavBarItem(child: Icon(Icons.spa_rounded), label: 'Soil'),
 
           GlazeNavBarItem(
             child: Icon(Icons.grass_rounded),
-            label: 'Fertilizer AI',
+            label: 'Fertilizer',
           ),
 
           GlazeNavBarItem(

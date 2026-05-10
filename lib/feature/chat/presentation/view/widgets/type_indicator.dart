@@ -10,8 +10,7 @@ class TypingIndicator extends StatefulWidget {
   State<TypingIndicator> createState() => _TypingIndicatorState();
 }
 
-class _TypingIndicatorState extends State<TypingIndicator>
-    with SingleTickerProviderStateMixin {
+class _TypingIndicatorState extends State<TypingIndicator> {
   int dotCount = 0;
   Timer? timer;
 
@@ -32,13 +31,19 @@ class _TypingIndicatorState extends State<TypingIndicator>
     super.dispose();
   }
 
+  String get dots => "." * dotCount;
+
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "Plant Bot is typing${" • " * dotCount}",
-      style: AppTextStyle.giloryRegular16(
-        context,
-      ).copyWith(color: AppColor.secondaryColor),
+    return Row(
+      children: [
+        Text(
+          "Mahsoly Bot is typing$dots",
+          style: AppTextStyle.giloryRegular16(
+            context,
+          ).copyWith(color: AppColor.primaryColor),
+        ),
+      ],
     );
   }
 }

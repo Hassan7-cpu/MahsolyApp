@@ -22,7 +22,6 @@ class CropResultView extends StatelessWidget {
         padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
-            /// TOP CARD (RESULT)
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(24.w),
@@ -62,7 +61,6 @@ class CropResultView extends StatelessWidget {
 
             SizedBox(height: 25.h),
 
-            /// EXPLANATION CARD
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(20.w),

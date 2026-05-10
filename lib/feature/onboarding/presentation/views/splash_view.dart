@@ -76,10 +76,15 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
 
     final seen = CacheHelper().getData(key: "onboardingSeen") ?? false;
 
-    final isLoggedIn =
-        token != null &&
-        token.toString().isNotEmpty &&
-        !JwtDecoder.isExpired(token);
+    bool isLoggedIn = false;
+
+    if (token != null && token.toString().isNotEmpty) {
+      try {
+        isLoggedIn = !JwtDecoder.isExpired(token);
+      } catch (e) {
+        isLoggedIn = false;
+      }
+    }
 
     if (isLoggedIn) {
       Navigator.pushReplacement(
@@ -88,6 +93,11 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
       );
       return;
     }
+
+    // remove expired or invalid token
+    await CacheHelper().removeData(key: ApiKey.access_token);
+
+    await CacheHelper().removeData(key: ApiKey.id);
 
     if (!seen) {
       Navigator.pushReplacement(
@@ -128,7 +138,6 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
             ),
 
             SizedBox(height: 20.h),
-
             SlideTransition(
               position: imageAnimation,
               child: Image.asset(

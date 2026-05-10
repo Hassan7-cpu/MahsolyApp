@@ -41,9 +41,6 @@ class UserRepository {
 
       final decoded = JwtDecoder.decode(token);
       final userId = decoded['sub']?.toString() ?? '';
-
-      await CacheHelper().clearData();
-
       await CacheHelper().saveData(key: ApiKey.access_token, value: token);
 
       await CacheHelper().saveData(key: ApiKey.email, value: email);

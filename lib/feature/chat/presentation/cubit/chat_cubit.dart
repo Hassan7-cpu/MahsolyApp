@@ -10,7 +10,6 @@ class ChatCubit extends Cubit<ChatState> {
   final String userId;
 
   final List<MessageModel> _messages = [];
-
   List<MessageModel> get messages => _messages;
 
   bool _isClosed = false;
@@ -21,23 +20,9 @@ class ChatCubit extends Cubit<ChatState> {
     return super.close();
   }
 
-  bool isPlantQuestion(String text) {
-    final keywords = [
-      "plant",
-      "soil",
-      "crop",
-      "disease",
-      "fruit",
-      "apple",
-      "farming",
-    ];
-    return keywords.any((e) => text.toLowerCase().contains(e));
-  }
-
   Future<void> sendMessage(String text) async {
     if (text.trim().isEmpty) return;
 
-    // user message
     _messages.add(
       MessageModel(
         isUser: true,
@@ -46,23 +31,8 @@ class ChatCubit extends Cubit<ChatState> {
         userId: userId,
       ),
     );
-    emit(ChatSuccess());
+
     emit(ChatLoading());
-
-    if (!isPlantQuestion(text)) {
-      _messages.add(
-        MessageModel(
-          isUser: false,
-          text: "I only answer agriculture-related questions 🌱",
-          id: DateTime.now().toString(),
-          userId: userId,
-        ),
-      );
-
-      if (_isClosed) return;
-      emit(ChatSuccess());
-      return;
-    }
 
     try {
       final reply = await _chatService.sendMessage(text);
@@ -80,8 +50,7 @@ class ChatCubit extends Cubit<ChatState> {
 
       emit(ChatSuccess());
     } catch (e) {
-      if (_isClosed) return;
-      emit(ChatError("Something went wrong"));
+      emit(ChatError("⚠️ Something went wrong, try again"));
     }
   }
 }

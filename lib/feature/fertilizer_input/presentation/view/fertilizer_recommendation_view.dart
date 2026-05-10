@@ -18,7 +18,7 @@ class FertilizerRecommendationView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: HeaderSection(title: "Fertilizer Recommendation"),
+          title: HeaderSection(title: "Fertilizer AI"),
         ),
         body: FertilizerRecommendationViewBody(),
       ),
