@@ -26,7 +26,7 @@
 ---
 
 ## 🌟 Project Overview
-In the face of global food security challenges, **Mahsoly**empowers users with precision agriculture capabilities. By utilizing Computer Vision for disease detection and LLMs for expert-level advice, the app reduces the dependency on manual inspections and provides immediate, scientifically backed recommendations for crop management.
+In the face of global food security challenges, **Mahsoly** empowers users with precision agriculture capabilities. By utilizing Computer Vision for disease detection and LLMs for expert-level advice, the app reduces the dependency on manual inspections and provides immediate, scientifically backed recommendations for crop management.
 
 ---
 
