@@ -4,7 +4,7 @@ import 'package:save_plant/core/errors/exceptions.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
 import 'package:save_plant/core/networking/dio_consumer.dart';
 import 'package:save_plant/core/errors/error_model.dart';
-import 'package:save_plant/feature/soil_input/data/model/soil_model.dart';
+import 'package:save_plant/feature/crop_recommendation/data/model/soil_model.dart';
 
 class SoilRepo {
   final DioConsumer api;

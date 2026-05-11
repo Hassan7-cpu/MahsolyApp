@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:save_plant/feature/soil_input/data/repo/soil_repo.dart';
-import 'package:save_plant/feature/soil_input/presentation/cubit/soil_state.dart';
+import 'package:save_plant/feature/crop_recommendation/data/repo/soil_repo.dart';
+import 'package:save_plant/feature/crop_recommendation/presentation/cubit/soil_state.dart';
 
 class SoilCubit extends Cubit<SoilState> {
   SoilCubit(this.repo) : super(InitialState());

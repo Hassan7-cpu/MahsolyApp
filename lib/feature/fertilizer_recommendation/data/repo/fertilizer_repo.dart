@@ -4,7 +4,7 @@ import 'package:save_plant/core/errors/exceptions.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
 import 'package:save_plant/core/networking/dio_consumer.dart';
 import 'package:save_plant/core/errors/error_model.dart';
-import 'package:save_plant/feature/fertilizer_input/data/model/firtilizer_model.dart';
+import 'package:save_plant/feature/fertilizer_recommendation/data/model/firtilizer_model.dart';
 
 class FertilizerRepo {
   final DioConsumer api;

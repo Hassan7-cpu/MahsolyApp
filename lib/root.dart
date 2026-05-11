@@ -10,8 +10,8 @@ import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
 import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
 import 'package:save_plant/feature/chat/presentation/view/chatbot_view.dart';
 import 'package:save_plant/feature/home/presentation/views/home_view.dart';
-import 'package:save_plant/feature/soil_input/presentation/view/soil_input_view.dart';
-import 'package:save_plant/feature/fertilizer_input/presentation/view/fertilizer_recommendation_view.dart';
+import 'package:save_plant/feature/crop_recommendation/presentation/view/soil_input_view.dart';
+import 'package:save_plant/feature/fertilizer_recommendation/presentation/view/fertilizer_recommendation_view.dart';
 
 class Root extends StatefulWidget {
   const Root({super.key});

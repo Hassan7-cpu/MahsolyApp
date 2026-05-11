@@ -5,9 +5,9 @@ import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/functions/snackbar_message.dart';
 import 'package:save_plant/core/functions/validators.dart';
 import 'package:save_plant/core/widgets/custom_button.dart';
-import 'package:save_plant/feature/soil_input/presentation/cubit/soil_cubit.dart';
-import 'package:save_plant/feature/soil_input/presentation/cubit/soil_state.dart';
-import 'package:save_plant/feature/soil_input/presentation/view/crop_result_view.dart';
+import 'package:save_plant/feature/crop_recommendation/presentation/cubit/soil_cubit.dart';
+import 'package:save_plant/feature/crop_recommendation/presentation/cubit/soil_state.dart';
+import 'package:save_plant/feature/crop_recommendation/presentation/view/crop_result_view.dart';
 import 'package:save_plant/core/widgets/build_section.dart';
 import 'package:save_plant/core/widgets/custom_field.dart';
 

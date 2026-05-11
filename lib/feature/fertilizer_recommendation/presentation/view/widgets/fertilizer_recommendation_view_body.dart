@@ -7,9 +7,9 @@ import 'package:save_plant/core/widgets/custom_field.dart';
 import 'package:save_plant/core/functions/snackbar_message.dart';
 import 'package:save_plant/core/functions/validators.dart';
 import 'package:save_plant/core/widgets/custom_button.dart';
-import 'package:save_plant/feature/fertilizer_input/presentation/cubit/fertilizer_cubit.dart';
-import 'package:save_plant/feature/fertilizer_input/presentation/cubit/fertilizer_state.dart';
-import 'package:save_plant/feature/fertilizer_input/presentation/view/fertilizer_result.dart';
+import 'package:save_plant/feature/fertilizer_recommendation/presentation/cubit/fertilizer_cubit.dart';
+import 'package:save_plant/feature/fertilizer_recommendation/presentation/cubit/fertilizer_state.dart';
+import 'package:save_plant/feature/fertilizer_recommendation/presentation/view/fertilizer_result.dart';
 
 class FertilizerRecommendationViewBody extends StatefulWidget {
   const FertilizerRecommendationViewBody({super.key});

@@ -7,7 +7,7 @@ class SoilResultModel {
   factory SoilResultModel.fromJson(Map<String, dynamic> data) {
     return SoilResultModel(
       crop: data['recommended_crop'] ?? '',
-      explanation: data['explanation'] ?? '',
+      explanation: data['explanation '] ?? data['explanation'] ?? '',
     );
   }
 }

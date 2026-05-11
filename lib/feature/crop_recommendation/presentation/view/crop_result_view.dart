@@ -85,12 +85,12 @@ class CropResultView extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   SizedBox(height: 15.h),
-
                   Text(
                     explanation,
-                    style: AppTextStyle.giloryRegular14(context),
+                    style: AppTextStyle.giloryRegular14(
+                      context,
+                    ).copyWith(color: Colors.black),
                   ),
                 ],
               ),

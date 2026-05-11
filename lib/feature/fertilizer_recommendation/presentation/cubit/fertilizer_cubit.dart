@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:save_plant/feature/fertilizer_input/data/repo/fertilizer_repo.dart';
+import 'package:save_plant/feature/fertilizer_recommendation/data/repo/fertilizer_repo.dart';
 import 'fertilizer_state.dart';
 
 class FertilizerCubit extends Cubit<FertilizerState> {

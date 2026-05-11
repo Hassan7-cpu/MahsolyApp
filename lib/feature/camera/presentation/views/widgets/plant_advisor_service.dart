@@ -26,20 +26,14 @@ class PlantAdvisorService {
             Part.text("""
 You are an expert agricultural plant doctor.
 
-Return ONLY valid JSON (no text outside it):
+Return ONLY valid JSON:
 
 {
   "Symptoms": ["short point"],
   "Causes": ["short point"],
   "Treatment": ["short point"],
-  "Prevention": ["short point"],
+  "Prevention": ["short point"]
 }
-
-Rules:
-- very short and practical
-- no explanation
-- no extra text
-- if empty return []
 
 Plant: $plantName
 Disease: $diseaseName
@@ -49,27 +43,38 @@ Disease: $diseaseName
 
         final output = response?.output;
 
-        if (output != null && output.isNotEmpty) {
-          // Strip markdown code blocks if present
-          String cleanedOutput = output.trim();
-          if (cleanedOutput.startsWith('```json')) {
-            cleanedOutput = cleanedOutput.substring(7);
-          } else if (cleanedOutput.startsWith('```')) {
-            cleanedOutput = cleanedOutput.substring(3);
-          }
-          if (cleanedOutput.endsWith('```')) {
-            cleanedOutput = cleanedOutput.substring(
-              0,
-              cleanedOutput.length - 3,
-            );
-          }
-          return cleanedOutput.trim();
+        if (output != null && output.trim().isNotEmpty) {
+          return _cleanJson(output);
         }
       } catch (e) {
+        final errorMsg = e.toString().toLowerCase();
+
+        if (errorMsg.contains("quota") ||
+            errorMsg.contains("api key") ||
+            errorMsg.contains("permission")) {
+          return "ERROR: API limit reached or invalid key";
+        }
+
         continue;
       }
     }
 
-    return "{}";
+    return "ERROR: All models failed";
+  }
+
+  String _cleanJson(String output) {
+    String cleaned = output.trim();
+
+    if (cleaned.startsWith('```json')) {
+      cleaned = cleaned.substring(7);
+    } else if (cleaned.startsWith('```')) {
+      cleaned = cleaned.substring(3);
+    }
+
+    if (cleaned.endsWith('```')) {
+      cleaned = cleaned.substring(0, cleaned.length - 3);
+    }
+
+    return cleaned.trim();
   }
 }
