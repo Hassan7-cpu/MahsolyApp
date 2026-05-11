@@ -14,8 +14,6 @@ class AppSettingsCard extends StatefulWidget {
 }
 
 class _AppSettingsCardState extends State<AppSettingsCard> {
-  bool isDark = false;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,31 +24,30 @@ class _AppSettingsCardState extends State<AppSettingsCard> {
         children: [
           Text("App Settings", style: AppTextStyle.giloryBold18(context)),
           SizedBox(height: 16.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              isDark
-                  ? Text(
-                      "Dark Mode",
-                      style: AppTextStyle.giloryRegular16(context),
-                    )
-                  : Text(
-                      "Light Mode",
-                      style: AppTextStyle.giloryRegular16(context),
-                    ),
-              BlocBuilder<ThemeCubit, ThemeState>(
-                builder: (context, state) {
-                  return Switch(
-                    value: state.themeMode == ThemeMode.dark,
+
+          BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              final isDark = state.themeMode == ThemeMode.dark;
+
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    isDark ? "Dark Mode" : "Light Mode",
+                    style: AppTextStyle.giloryRegular16(context),
+                  ),
+
+                  Switch(
+                    value: isDark,
                     onChanged: (value) {
                       ThemeCubit.get(
                         context,
                       ).setTheme(value ? ThemeMode.dark : ThemeMode.light);
                     },
-                  );
-                },
-              ),
-            ],
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),

@@ -6,6 +6,7 @@ import 'package:save_plant/core/widgets/custom_button.dart';
 import 'package:save_plant/core/widgets/header_section.dart';
 import 'package:save_plant/feature/camera/data/model/scan_model.dart';
 import 'package:save_plant/feature/camera/presentation/views/camera_view.dart';
+import 'package:save_plant/feature/camera/presentation/views/plant_ai_result_view.dart';
 
 class ResultView extends StatelessWidget {
   final ScanModel data;
@@ -36,74 +37,38 @@ class ResultView extends StatelessWidget {
                         child: AspectRatio(
                           aspectRatio: 16 / 9,
                           child: data.imageUrl.isNotEmpty
-                              ? Image.network(
-                                  data.imageUrl,
-                                  fit: BoxFit.cover,
-                                  loadingBuilder:
-                                      (context, child, loadingProgress) {
-                                        if (loadingProgress == null)
-                                          return child;
-                                        return const Center(
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      },
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Center(
-                                      child: Icon(
-                                        Icons.broken_image,
-                                        size: 60.sp,
-                                      ),
-                                    );
-                                  },
-                                )
-                              : Center(
-                                  child: Icon(
-                                    Icons.image_not_supported,
-                                    size: 60.sp,
-                                  ),
-                                ),
+                              ? Image.network(data.imageUrl, fit: BoxFit.cover)
+                              : const Icon(Icons.image_not_supported),
                         ),
                       ),
+
                       SizedBox(height: 16.h),
+
                       if (isError) ...[
                         Text(
-                          data.diseaseName.isEmpty
-                              ? data.message
-                              : "Low confidence result, please try again",
+                          data.message,
                           style: AppTextStyle.giloryBold22(
                             context,
                           ).copyWith(color: Colors.red),
-                        ),
-
-                        SizedBox(height: 12.h),
-
-                        Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(12.r),
-                          decoration: AppDecoration.card(context),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: data.tips.map((tip) {
-                              return Padding(
-                                padding: EdgeInsets.only(bottom: 6.h),
-                                child: Text("• $tip"),
-                              );
-                            }).toList(),
-                          ),
                         ),
                       ] else ...[
                         Text(
                           data.plantName,
                           style: AppTextStyle.giloryBold22(context),
                         ),
+
                         SizedBox(height: 12.h),
+
                         Container(
                           width: double.infinity,
                           padding: EdgeInsets.all(12.r),
                           decoration: AppDecoration.card(
                             context,
                           ).copyWith(color: Colors.red.shade200),
-                          child: Text("Disease: ${data.diseaseName}"),
+                          child: Text(
+                            "Disease: ${data.diseaseName}",
+                            style: AppTextStyle.giloryRegular18(context),
+                          ),
                         ),
                       ],
                     ],
@@ -111,11 +76,28 @@ class ResultView extends StatelessWidget {
                 ),
               ),
 
+              if (!isError)
+                CustomButton(
+                  buttonText: "Get Treatment Plan",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => PlantAiResultView(
+                          plantName: data.plantName,
+                          diseaseName: data.diseaseName,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+              SizedBox(height: 20.h),
               CustomButton(
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const CameraView()),
+                    MaterialPageRoute(builder: (_) => const CameraView()),
                   );
                 },
                 buttonText: "Scan Another",

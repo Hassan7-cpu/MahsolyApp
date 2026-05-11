@@ -5,10 +5,10 @@ class ChatService {
   final String _apiKey = dotenv.env['CHAT_BOT_API_KEY']!;
 
   final List<String> _models = [
-    "gemini-1.5-flash",
-    "gemini-1.5-pro",
-    "gemini-1.0-pro",
+    "gemini-3.1-flash-lite",
+    "gemini-2.5-flash",
     "gemini-2.0-flash",
+    "gemini-1.5-flash",
   ];
 
   int _modelIndex = 0;
