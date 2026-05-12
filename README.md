@@ -40,6 +40,16 @@ In the face of global food security challenges, **Mahsoly** empowers users with 
 
 ---
 
+## 📱 Application Screenshots
+
+<p align="center">
+  <img src="assets/readme/dashboard.jpg" width="24%" />
+  <img src="assets/readme/crop_result.jpg" width="24%" />
+  <img src="assets/readme/chatbot.jpg" width="24%" />
+  <img src="assets/readme/plant_ai_result.jpg" width="24%" />
+</p>
+
+---
 ## 🏗 System Architecture
 Mahsoly is built on a **Clean Architecture** inspired pattern, ensuring high maintainability and testability:
 
