@@ -37,7 +37,7 @@ class _RootState extends State<Root> {
       const PhotoTipsView(),
       const SoilInputView(),
       const FertilizerRecommendationView(),
-      const ChatbotView(),
+      const ChatBotView(),
     ];
 
     _checkAuth();
