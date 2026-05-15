@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:save_plant/core/functions/app_decoration.dart';
-import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/core/widgets/custom_button.dart';
 import 'package:save_plant/core/widgets/header_section.dart';
 import 'package:save_plant/feature/camera/data/model/scan_model.dart';
 import 'package:save_plant/feature/camera/presentation/views/camera_view.dart';
-import 'package:save_plant/feature/camera/presentation/views/plant_ai_result_view.dart';
+import 'package:save_plant/feature/camera/presentation/views/widgets/build_content.dart';
+import 'package:save_plant/feature/camera/presentation/views/widgets/build_error.dart';
+import 'package:save_plant/feature/camera/presentation/views/widgets/build_image.dart';
+import 'package:save_plant/root.dart';
 
 class ResultView extends StatelessWidget {
   final ScanModel data;
@@ -20,78 +21,27 @@ class ResultView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const HeaderSection(title: "Analysis Result"),
+        title: const HeaderSection(title: "Detection Result"),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const Root()),
+            );
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
       ),
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.all(16.r),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(16.r),
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: data.imageUrl.isNotEmpty
-                              ? Image.network(data.imageUrl, fit: BoxFit.cover)
-                              : const Icon(Icons.image_not_supported),
-                        ),
-                      ),
-
-                      SizedBox(height: 16.h),
-
-                      if (isError) ...[
-                        Text(
-                          data.message,
-                          style: AppTextStyle.giloryBold22(
-                            context,
-                          ).copyWith(color: Colors.red),
-                        ),
-                      ] else ...[
-                        Text(
-                          data.plantName,
-                          style: AppTextStyle.giloryBold22(context),
-                        ),
-
-                        SizedBox(height: 12.h),
-
-                        Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(12.r),
-                          decoration: AppDecoration.card(
-                            context,
-                          ).copyWith(color: Colors.red.shade200),
-                          child: Text(
-                            "Disease: ${data.diseaseName}",
-                            style: AppTextStyle.giloryRegular18(context),
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-              ),
-
-              if (!isError)
-                CustomButton(
-                  buttonText: "Get Treatment Plan",
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => PlantAiResultView(
-                          plantName: data.plantName,
-                          diseaseName: data.diseaseName,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-
+              BuildImage(data: data),
+              SizedBox(height: 16.h),
+              if (isError) BuildError(data: data) else BuildContent(data: data),
               SizedBox(height: 20.h),
               CustomButton(
                 onPressed: () {

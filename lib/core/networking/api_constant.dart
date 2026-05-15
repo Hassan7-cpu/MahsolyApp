@@ -23,4 +23,13 @@ class ApiKey {
   static String id = "id";
   static String message = "message";
   static String reply = "reply";
+  static String scanId = "scan_id";
+  static String plantName = "plant_name";
+  static String diseaseName = "disease_name";
+  static String confidence = "confidence";
+  static String imageUrl = "image_url";
+  static String symptoms = "symptoms";
+  static String treatment = "treatment";
+  static String prevention = "prevention";
+  static String tips = "tips";
 }

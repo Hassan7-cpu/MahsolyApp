@@ -17,8 +17,6 @@ class PlantRepo {
     try {
       final token = CacheHelper().getData(key: ApiKey.access_token) as String?;
 
-      print("🔑 TOKEN USED: $token");
-
       if (token == null || token.isEmpty) {
         return Left("Please login first");
       }
