@@ -36,7 +36,9 @@ class Messages extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              color: isUser ? AppColor.darkText : AppColor.lightText,
+              color: isUser
+                  ? Theme.of(context).colorScheme.onBackground
+                  : Theme.of(context).colorScheme.onBackground,
             ),
           ),
         ),

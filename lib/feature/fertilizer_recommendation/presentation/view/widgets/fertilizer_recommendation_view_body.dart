@@ -105,136 +105,138 @@ class _FertilizerRecommendationViewBodyState
           padding: EdgeInsets.all(16.w),
           child: Form(
             key: formKey,
-            child: Column(
-              children: [
-                BuildSection(
-                  title: "Environment",
-                  children: [
-                    CustomField(
-                      controller: tempController,
-                      hint: "Temperature",
-                      keyboardType: TextInputType.number,
-                      validator: FertilizerValidators.validateTemperature,
-                      icon: Icons.thermostat,
-                    ),
-                    CustomField(
-                      controller: humidityController,
-                      hint: "Humidity",
-                      keyboardType: TextInputType.number,
-                      validator: FertilizerValidators.validateHumidity,
-                      icon: Icons.water_drop,
-                    ),
-                    CustomField(
-                      controller: moistureController,
-                      hint: "Moisture",
-                      keyboardType: TextInputType.number,
-                      validator: FertilizerValidators.validateMoisture,
-                      icon: Icons.opacity,
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 16.h),
-
-                BuildSection(
-                  title: "Soil & Crop",
-                  children: [
-                    DropdownButtonFormField<String>(
-                      value: selectedSoilType,
-                      decoration: const InputDecoration(
-                        hintText: "Soil Type",
-                        prefixIcon: Icon(Icons.landscape),
+            child: SafeArea(
+              bottom: true,
+              child: Column(
+                children: [
+                  BuildSection(
+                    title: "Environment",
+                    children: [
+                      CustomField(
+                        controller: tempController,
+                        hint: "Temperature",
+                        keyboardType: TextInputType.number,
+                        validator: FertilizerValidators.validateTemperature,
+                        icon: Icons.thermostat,
                       ),
-                      items: soilTypes
-                          .map(
-                            (e) => DropdownMenuItem(value: e, child: Text(e)),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedSoilType = value;
-                        });
-                      },
-                      validator: (value) =>
-                          value == null ? "Soil Type is required" : null,
-                    ),
-
-                    SizedBox(height: 12.h),
-
-                    DropdownButtonFormField<String>(
-                      value: selectedCropType,
-                      decoration: const InputDecoration(
-                        hintText: "Crop Type",
-                        prefixIcon: Icon(Icons.agriculture),
+                      CustomField(
+                        controller: humidityController,
+                        hint: "Humidity",
+                        keyboardType: TextInputType.number,
+                        validator: FertilizerValidators.validateHumidity,
+                        icon: Icons.water_drop,
                       ),
-                      items: cropTypes
-                          .map(
-                            (e) => DropdownMenuItem(value: e, child: Text(e)),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedCropType = value;
-                        });
-                      },
-                      validator: (value) =>
-                          value == null ? "Crop Type is required" : null,
-                    ),
-                  ],
-                ),
+                      CustomField(
+                        controller: moistureController,
+                        hint: "Moisture",
+                        keyboardType: TextInputType.number,
+                        validator: FertilizerValidators.validateMoisture,
+                        icon: Icons.opacity,
+                      ),
+                    ],
+                  ),
 
-                SizedBox(height: 16.h),
+                  SizedBox(height: 16.h),
 
-                BuildSection(
-                  title: "Nutrients",
-                  children: [
-                    CustomField(
-                      controller: nitrogenController,
-                      hint: "Nitrogen",
-                      keyboardType: TextInputType.number,
-                      validator: FertilizerValidators.validateNitrogen,
-                      icon: Icons.eco,
-                    ),
-                    CustomField(
-                      controller: phosphorousController,
-                      hint: "Phosphorous",
-                      keyboardType: TextInputType.number,
-                      validator: FertilizerValidators.validatePhosphorous,
-                      icon: Icons.science,
-                    ),
-                    CustomField(
-                      controller: potassiumController,
-                      hint: "Potassium",
-                      keyboardType: TextInputType.number,
-                      validator: FertilizerValidators.validatePotassium,
-                      icon: Icons.grass,
-                    ),
-                  ],
-                ),
+                  BuildSection(
+                    title: "Soil & Crop",
+                    children: [
+                      DropdownButtonFormField<String>(
+                        value: selectedSoilType,
+                        decoration: const InputDecoration(
+                          hintText: "Soil Type",
+                          prefixIcon: Icon(Icons.landscape),
+                        ),
+                        items: soilTypes
+                            .map(
+                              (e) => DropdownMenuItem(value: e, child: Text(e)),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedSoilType = value;
+                          });
+                        },
+                        validator: (value) =>
+                            value == null ? "Soil Type is required" : null,
+                      ),
 
-                SizedBox(height: 24.h),
+                      SizedBox(height: 12.h),
 
-                CustomButton(
-                  buttonText: 'Analyze',
-                  isLoading: state is FertilizerLoading,
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      context.read<FertilizerCubit>().predictFertilizer(
-                        temperature: tempController.text.trim(),
-                        humidity: humidityController.text.trim(),
-                        moisture: moistureController.text.trim(),
-                        soilType: selectedSoilType!,
-                        cropType: selectedCropType!,
-                        nitrogen: nitrogenController.text.trim(),
-                        potassium: potassiumController.text.trim(),
-                        phosphorous: phosphorousController.text.trim(),
-                      );
-                    }
-                  },
-                ),
+                      DropdownButtonFormField<String>(
+                        value: selectedCropType,
+                        decoration: const InputDecoration(
+                          hintText: "Crop Type",
+                          prefixIcon: Icon(Icons.agriculture),
+                        ),
+                        items: cropTypes
+                            .map(
+                              (e) => DropdownMenuItem(value: e, child: Text(e)),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedCropType = value;
+                          });
+                        },
+                        validator: (value) =>
+                            value == null ? "Crop Type is required" : null,
+                      ),
+                    ],
+                  ),
 
-                SizedBox(height: 25.h),
-              ],
+                  SizedBox(height: 16.h),
+
+                  BuildSection(
+                    title: "Nutrients",
+                    children: [
+                      CustomField(
+                        controller: nitrogenController,
+                        hint: "Nitrogen",
+                        keyboardType: TextInputType.number,
+                        validator: FertilizerValidators.validateNitrogen,
+                        icon: Icons.eco,
+                      ),
+                      CustomField(
+                        controller: phosphorousController,
+                        hint: "Phosphorous",
+                        keyboardType: TextInputType.number,
+                        validator: FertilizerValidators.validatePhosphorous,
+                        icon: Icons.science,
+                      ),
+                      CustomField(
+                        controller: potassiumController,
+                        hint: "Potassium",
+                        keyboardType: TextInputType.number,
+                        validator: FertilizerValidators.validatePotassium,
+                        icon: Icons.grass,
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 24.h),
+
+                  CustomButton(
+                    buttonText: 'Analyze',
+                    isLoading: state is FertilizerLoading,
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        context.read<FertilizerCubit>().predictFertilizer(
+                          temperature: tempController.text.trim(),
+                          humidity: humidityController.text.trim(),
+                          moisture: moistureController.text.trim(),
+                          soilType: selectedSoilType!,
+                          cropType: selectedCropType!,
+                          nitrogen: nitrogenController.text.trim(),
+                          potassium: potassiumController.text.trim(),
+                          phosphorous: phosphorousController.text.trim(),
+                        );
+                      }
+                    },
+                  ),
+                  SizedBox(height: 25.h),
+                ],
+              ),
             ),
           ),
         );
