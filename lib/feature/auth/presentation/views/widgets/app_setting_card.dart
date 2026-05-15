@@ -1,10 +1,10 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:save_plant/core/functions/app_decoration.dart';
 import 'package:save_plant/core/theme/cubit/theme_cubit.dart';
 import 'package:save_plant/core/theme/cubit/theme_state.dart';
 import 'package:save_plant/core/theme/text_style.dart';
-import 'package:save_plant/core/functions/app_decoration.dart';
 
 class AppSettingsCard extends StatefulWidget {
   const AppSettingsCard({super.key});
@@ -23,6 +23,7 @@ class _AppSettingsCardState extends State<AppSettingsCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text("App Settings", style: AppTextStyle.giloryBold18(context)),
+
           SizedBox(height: 16.h),
 
           BlocBuilder<ThemeCubit, ThemeState>(
@@ -33,16 +34,16 @@ class _AppSettingsCardState extends State<AppSettingsCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    isDark ? "Dark Mode" : "Light Mode",
+                    isDark ? "Light Mode" : "Dark Mode",
                     style: AppTextStyle.giloryRegular16(context),
                   ),
 
                   Switch(
                     value: isDark,
                     onChanged: (value) {
-                      ThemeCubit.get(
-                        context,
-                      ).setTheme(value ? ThemeMode.dark : ThemeMode.light);
+                      final mode = value ? ThemeMode.dark : ThemeMode.light;
+
+                      ThemeCubit.get(context).changeTheme(mode);
                     },
                   ),
                 ],

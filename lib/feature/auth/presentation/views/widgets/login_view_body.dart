@@ -1,5 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:save_plant/core/cache/cache_helper.dart';
+import 'package:save_plant/core/networking/api_constant.dart';
+import 'package:save_plant/core/theme/cubit/theme_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:save_plant/core/functions/snackbar_message.dart';
@@ -40,12 +43,19 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: BlocConsumer<UserCubit, UserState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is SignInFailure) {
             snackBarMessage(context, state.errMessage, color: Colors.red);
           }
           if (state is SignInSuccess) {
             snackBarMessage(context, "Login successful", color: Colors.green);
+
+            final email = CacheHelper().getData(key: ApiKey.email);
+
+            if (email != null && email is String) {
+              ThemeCubit.get(context).setUser(email);
+            }
+
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (_) => Root()),

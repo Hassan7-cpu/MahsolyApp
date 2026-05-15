@@ -50,7 +50,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => OtpView(email: emailController.text),
+                builder: (context) => OtpView(email: emailController.text.trim()),
               ),
             );
           });
@@ -136,9 +136,9 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                         onPressed: () {
                           if (!formKey.currentState!.validate()) return;
                           context.read<UserCubit>().signUp(
-                            nameController.text,
-                            emailController.text,
-                            passwordController.text,
+                            nameController.text.trim(),
+                            emailController.text.trim(),
+                            passwordController.text.trim(),
                           );
                           print("SIGNUP STARTED");
                         },

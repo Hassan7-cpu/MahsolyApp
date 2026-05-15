@@ -6,7 +6,7 @@ abstract class ThemeState {
 }
 
 class ThemeInitial extends ThemeState {
-  const ThemeInitial() : super(ThemeMode.system);
+  const ThemeInitial(ThemeMode themeMode) : super(themeMode);
 }
 
 class ThemeChanged extends ThemeState {

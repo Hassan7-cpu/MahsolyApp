@@ -8,6 +8,7 @@ import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/functions/app_decoration.dart';
 import 'package:save_plant/core/functions/snackbar_message.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
+import 'package:save_plant/core/theme/cubit/theme_cubit.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
@@ -61,12 +62,13 @@ class _ProfileHeaderCardState extends State<ProfileHeaderCard> {
   Future<void> logout() async {
     await CacheHelper().removeData(key: ApiKey.access_token);
     await CacheHelper().removeData(key: ApiKey.id);
+    await CacheHelper().removeData(key: ApiKey.email);
+    final themeCubit = ThemeCubit.get(context);
+    themeCubit.reset();
 
     if (!mounted) return;
 
     snackBarMessage(context, "Logged out successfully", color: Colors.green);
-
-    await Future.delayed(const Duration(milliseconds: 300));
 
     Navigator.pushAndRemoveUntil(
       context,

@@ -4,44 +4,50 @@ import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/theme/cubit/theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> with WidgetsBindingObserver {
-  ThemeCubit() : super(const ThemeInitial()) {
+  ThemeCubit() : super(ThemeInitial(ThemeMode.system)) {
     WidgetsBinding.instance.addObserver(this);
-    loadSavedTheme();
   }
 
   static ThemeCubit get(BuildContext context) =>
       BlocProvider.of<ThemeCubit>(context);
 
-  @override
-  void didChangePlatformBrightness() {
-    final savedTheme = CacheHelper().getData(key: "theme");
+  String email = "";
 
-    if (savedTheme == "system" || savedTheme == null) {
-      final brightness =
-          WidgetsBinding.instance.platformDispatcher.platformBrightness;
+  void reset() {
+    email = "";
+    emit(const ThemeChanged(ThemeMode.system));
+  }
 
-      final newMode = brightness == Brightness.dark
-          ? ThemeMode.dark
-          : ThemeMode.light;
+  void setUser(String userEmail) {
+    debugPrint("🔄 Switching Theme to User: $userEmail");
+    email = userEmail;
+    loadSavedThemeForUser(userEmail);
+  }
 
-      emit(ThemeChanged(newMode));
+  void updateUserEmail(String newEmail) async {
+    if (email.isEmpty || email == newEmail) return;
+    final savedTheme = CacheHelper().getData(key: 'theme_$email');
+    email = newEmail;
+    if (savedTheme != null) {
+      await CacheHelper().saveData(key: 'theme_$newEmail', value: savedTheme);
     }
   }
 
-  void setTheme(ThemeMode themeMode) async {
-    await CacheHelper().saveData(key: "theme", value: themeMode.name);
-    emit(ThemeChanged(themeMode));
-  }
-
-  void loadSavedTheme() {
-    final savedTheme = CacheHelper().getData(key: "theme");
-
-    if (savedTheme != null) {
+  void loadSavedThemeForUser(String userEmail) {
+    final savedTheme = CacheHelper().getData(key: 'theme_$userEmail');
+    debugPrint("Loaded Theme for $userEmail: $savedTheme");
+    if (savedTheme != null && savedTheme is String) {
       emit(ThemeChanged(_getThemeFromString(savedTheme)));
     } else {
-      // ← مهم جدًا
       emit(const ThemeChanged(ThemeMode.system));
     }
+  }
+
+  void changeTheme(ThemeMode themeMode) async {
+    debugPrint("Saving ${themeMode.name} for User: $email");
+    await CacheHelper().saveData(key: 'theme_$email', value: themeMode.name);
+
+    emit(ThemeChanged(themeMode));
   }
 
   ThemeMode _getThemeFromString(String theme) {
@@ -52,6 +58,24 @@ class ThemeCubit extends Cubit<ThemeState> with WidgetsBindingObserver {
         return ThemeMode.dark;
       default:
         return ThemeMode.system;
+    }
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    if (email.isEmpty) return;
+
+    final savedTheme = CacheHelper().getData(key: 'theme_$email');
+
+    if (savedTheme == null || savedTheme == "system") {
+      final brightness =
+          WidgetsBinding.instance.platformDispatcher.platformBrightness;
+
+      emit(
+        ThemeChanged(
+          brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
+        ),
+      );
     }
   }
 

@@ -49,7 +49,7 @@ class _ProfileEditTablefieldState extends State<ProfileEditTablefield> {
             if (isEditing) {
               if (widget.isEmail) {
                 context.read<SettingCubit>().changeEmail(
-                  email: widget.controller.text,
+                  email: widget.controller.text.trim(),
                 );
               }
             }

@@ -5,6 +5,7 @@ import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/functions/snackbar_message.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
+import 'package:save_plant/core/theme/cubit/theme_cubit.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/confirm_email_otp_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/confirm_email_otp_state.dart';
@@ -32,6 +33,8 @@ class ConfirmEmailViewBody extends StatelessWidget {
       child: BlocConsumer<EmailOtpCubit, EmailOtpState>(
         listener: (context, state) async {
           if (state is EmailOtpSuccess) {
+            ThemeCubit.get(context).updateUserEmail(email.trim());
+
             await CacheHelper().removeData(key: ApiKey.access_token);
 
             await CacheHelper().removeData(key: ApiKey.email);
