@@ -23,26 +23,21 @@ class _AppSettingsCardState extends State<AppSettingsCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text("App Settings", style: AppTextStyle.giloryBold18(context)),
-
           SizedBox(height: 16.h),
-
           BlocBuilder<ThemeCubit, ThemeState>(
             builder: (context, state) {
               final isDark = state.themeMode == ThemeMode.dark;
-
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    isDark ? "Light Mode" : "Dark Mode",
+                    isDark ? "Dark Mode" : "Light Mode",
                     style: AppTextStyle.giloryRegular16(context),
                   ),
-
                   Switch(
                     value: isDark,
                     onChanged: (value) {
                       final mode = value ? ThemeMode.dark : ThemeMode.light;
-
                       ThemeCubit.get(context).changeTheme(mode);
                     },
                   ),

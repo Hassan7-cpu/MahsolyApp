@@ -1,5 +1,9 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Endpoints {
-  static const String baseUrl = 'https://mahsoly-app-8ehw.vercel.app/';
+  static final String baseUrl =
+      dotenv.env['BASE_URL'] ?? 'https://mahsoly-app-8ehw.vercel.app/';
+
   static const String signIn = 'auth/login';
   static String signUp = "auth/register";
   static String ChangeEmail = "auth/change-email";

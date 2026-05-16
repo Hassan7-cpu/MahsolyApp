@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/theme/cubit/theme_state.dart';
 
-class ThemeCubit extends Cubit<ThemeState> with WidgetsBindingObserver {
-  ThemeCubit() : super(ThemeInitial(ThemeMode.system)) {
-    WidgetsBinding.instance.addObserver(this);
-  }
+class ThemeCubit extends Cubit<ThemeState> {
+  ThemeCubit() : super(const ThemeInitial(ThemeMode.light));
 
   static ThemeCubit get(BuildContext context) =>
       BlocProvider.of<ThemeCubit>(context);
@@ -15,11 +13,11 @@ class ThemeCubit extends Cubit<ThemeState> with WidgetsBindingObserver {
 
   void reset() {
     email = "";
-    emit(const ThemeChanged(ThemeMode.system));
+    emit(const ThemeChanged(ThemeMode.light));
   }
 
   void setUser(String userEmail) {
-    debugPrint("🔄 Switching Theme to User: $userEmail");
+    debugPrint("Switching Theme to User: $userEmail");
     email = userEmail;
     loadSavedThemeForUser(userEmail);
   }
@@ -39,7 +37,7 @@ class ThemeCubit extends Cubit<ThemeState> with WidgetsBindingObserver {
     if (savedTheme != null && savedTheme is String) {
       emit(ThemeChanged(_getThemeFromString(savedTheme)));
     } else {
-      emit(const ThemeChanged(ThemeMode.system));
+      emit(const ThemeChanged(ThemeMode.light));
     }
   }
 
@@ -57,31 +55,7 @@ class ThemeCubit extends Cubit<ThemeState> with WidgetsBindingObserver {
       case "dark":
         return ThemeMode.dark;
       default:
-        return ThemeMode.system;
+        return ThemeMode.light;
     }
-  }
-
-  @override
-  void didChangePlatformBrightness() {
-    if (email.isEmpty) return;
-
-    final savedTheme = CacheHelper().getData(key: 'theme_$email');
-
-    if (savedTheme == null || savedTheme == "system") {
-      final brightness =
-          WidgetsBinding.instance.platformDispatcher.platformBrightness;
-
-      emit(
-        ThemeChanged(
-          brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light,
-        ),
-      );
-    }
-  }
-
-  @override
-  Future<void> close() {
-    WidgetsBinding.instance.removeObserver(this);
-    return super.close();
   }
 }
