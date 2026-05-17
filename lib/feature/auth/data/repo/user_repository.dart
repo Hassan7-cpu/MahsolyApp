@@ -46,6 +46,11 @@ class UserRepository {
       await CacheHelper().saveData(key: ApiKey.email, value: email);
 
       await CacheHelper().saveData(key: ApiKey.id, value: userId);
+      final userName =
+          decoded['name']?.toString() ?? decoded['username']?.toString() ?? '';
+      if (userName.isNotEmpty) {
+        await CacheHelper().saveData(key: ApiKey.name, value: userName);
+      }
 
       return Right(user);
     } on ServerException catch (e) {

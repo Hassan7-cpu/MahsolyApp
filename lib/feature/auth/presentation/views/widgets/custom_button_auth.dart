@@ -57,12 +57,7 @@ class _CustomButtonAuthState extends State<CustomButtonAuth> {
           width: widget.width ?? double.infinity,
           height: 50.h,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).colorScheme.primary,
-                Theme.of(context).colorScheme.secondary,
-              ],
-            ),
+            color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: widget.isLoading

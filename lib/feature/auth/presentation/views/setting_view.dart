@@ -19,7 +19,7 @@ class SettingView extends StatelessWidget {
         settingRepository: SettingRepository(api: DioConsumer(dio: Dio())),
       ),
       child: Scaffold(
-        appBar: AppBar(title: const HeaderSection(title: "Settings")),
+        appBar: AppBar(title: const HeaderSection(title: "Profile")),
         body: const SettingViewBody(),
       ),
     );

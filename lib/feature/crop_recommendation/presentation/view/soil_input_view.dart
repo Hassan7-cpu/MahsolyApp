@@ -17,7 +17,7 @@ class SoilInputView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: HeaderSection(title: "Soil Analysis"),
+          title: HeaderSection(title: "Crop Recommendation"),
         ),
         body: SoilInputViewBody(),
       ),

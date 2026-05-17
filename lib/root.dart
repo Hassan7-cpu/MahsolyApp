@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glaze_nav_bar/glaze_nav_bar.dart';
-
 import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
-
+import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
 import 'package:save_plant/feature/camera/presentation/views/photo_tips_view.dart';
 import 'package:save_plant/feature/chat/presentation/view/chatbot_view.dart';
@@ -99,30 +99,37 @@ class _RootState extends State<Root> {
           );
         },
 
-        items: const [
+        items: [
           GlazeNavBarItem(
-            child: Icon(CupertinoIcons.house_fill),
+            child: Icon(CupertinoIcons.house_fill, size: 22.sp),
             label: 'Home',
+            labelStyle: AppTextStyle.giloryRegular14(context),
           ),
 
           GlazeNavBarItem(
-            child: Icon(CupertinoIcons.camera_fill),
+            child: Icon(CupertinoIcons.camera_fill, size: 22.sp),
             label: 'Scan',
+            labelStyle: AppTextStyle.giloryRegular14(context),
           ),
 
-          GlazeNavBarItem(child: Icon(Icons.spa_rounded), label: 'Soil'),
+          GlazeNavBarItem(
+            child: Icon(Icons.spa_rounded, size: 22.sp),
+            label: 'crop',
+            labelStyle: AppTextStyle.giloryRegular14(context),
+          ),
 
           GlazeNavBarItem(
-            child: Icon(Icons.grass_rounded),
+            child: Icon(Icons.grass_rounded, size: 22.sp),
             label: 'Fertilizer',
+            labelStyle: AppTextStyle.giloryRegular14(context),
           ),
 
           GlazeNavBarItem(
-            child: Icon(Icons.smart_toy_rounded),
+            child: Icon(Icons.smart_toy_rounded, size: 22.sp),
             label: 'AI Chat',
+            labelStyle: AppTextStyle.giloryRegular14(context),
           ),
         ],
-
         gradient: LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,

@@ -11,7 +11,7 @@ class HeaderSection extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       title,
-      style: AppTextStyle.giloryBold24(context),
+      style: AppTextStyle.giloryBold22(context),
     );
   }
 }

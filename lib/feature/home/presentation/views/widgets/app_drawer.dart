@@ -22,7 +22,10 @@ class AppDrawer extends StatelessWidget {
                 size: 28.sp,
                 color: Theme.of(context).colorScheme.onBackground,
               ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 16.w,
+                vertical: 5.h,
+              ),
               title: Text(
                 "Dashboard",
                 style: AppTextStyle.giloryRegular18(
@@ -40,13 +43,13 @@ class AppDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(
-                Icons.settings,
+                Icons.person,
                 size: 28.sp,
                 color: Theme.of(context).colorScheme.onBackground,
               ),
               contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
               title: Text(
-                "Settings",
+                "Profile",
                 style: AppTextStyle.giloryRegular18(
                   context,
                 ).copyWith(color: Theme.of(context).colorScheme.onBackground),
