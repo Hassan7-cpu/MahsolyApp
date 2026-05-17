@@ -103,8 +103,6 @@ lib/
 2. **Environment Configuration:**
    Create a `.env` file in the root directory:
    ```env
-   CHAT_BOT_API_KEY=YOUR_GEMINI_KEY
-   PLAT_DISEASE_API_KEY=YOUR_GEMINI_KEY
    BASE_URL=https://your-api-endpoint.com
    ```
 
