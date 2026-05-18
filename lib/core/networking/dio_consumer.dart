@@ -3,12 +3,14 @@ import 'package:save_plant/core/errors/exceptions.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
 import 'package:save_plant/core/networking/api_consumer.dart';
 import 'package:save_plant/core/networking/api_interceptors.dart';
+import 'package:save_plant/core/networking/token_refresh_interceptor.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;
 
   DioConsumer({required this.dio}) {
     dio.options.baseUrl = Endpoints.baseUrl;
+    dio.interceptors.add(TokenRefreshInterceptor(dio: dio));
     dio.interceptors.add(ApiInterceptor());
     dio.interceptors.add(
       LogInterceptor(

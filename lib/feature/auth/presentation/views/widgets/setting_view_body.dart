@@ -21,6 +21,7 @@ class SettingViewBody extends StatefulWidget {
 class _SettingViewBodyState extends State<SettingViewBody> {
   Future<void> logout() async {
     await CacheHelper().removeData(key: ApiKey.access_token);
+    await CacheHelper().removeData(key: ApiKey.refresh_token);
     await CacheHelper().removeData(key: ApiKey.id);
     await CacheHelper().removeData(key: ApiKey.email);
     await CacheHelper().removeData(key: ApiKey.name);

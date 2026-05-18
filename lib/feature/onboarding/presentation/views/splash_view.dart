@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/constants/app_colors.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
+import 'package:save_plant/core/theme/cubit/theme_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/views/login_view.dart';
 import 'package:save_plant/feature/onboarding/presentation/views/onboarding_view.dart';
-import 'package:save_plant/core/theme/cubit/theme_cubit.dart';
 import 'package:save_plant/root.dart';
 
 class SplashView extends StatefulWidget {
@@ -46,26 +45,25 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   }
 
   Future<void> navigate() async {
-    final token = CacheHelper().getData(key: ApiKey.access_token);
-
+    final refreshToken = CacheHelper().getData(key: ApiKey.refresh_token);
     final seen = CacheHelper().getData(key: "onboardingSeen") ?? false;
 
     bool isLoggedIn = false;
 
-    if (token != null && token.toString().isNotEmpty) {
-      try {
-        isLoggedIn = !JwtDecoder.isExpired(token);
-      } catch (e) {
-        isLoggedIn = false;
-      }
+    if (refreshToken != null && refreshToken.toString().isNotEmpty) {
+      isLoggedIn = true;
+    } else {
+      isLoggedIn = false;
     }
 
     if (!mounted) return;
+
     if (isLoggedIn) {
       final email = CacheHelper().getData(key: ApiKey.email);
       if (email != null && email is String) {
         ThemeCubit.get(context).setUser(email);
       }
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const Root()),
@@ -74,6 +72,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     }
 
     await CacheHelper().removeData(key: ApiKey.access_token);
+    await CacheHelper().removeData(key: ApiKey.refresh_token);
     await CacheHelper().removeData(key: ApiKey.id);
 
     if (!seen) {

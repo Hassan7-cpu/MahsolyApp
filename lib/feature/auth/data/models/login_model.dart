@@ -1,16 +1,21 @@
 import 'package:save_plant/core/networking/api_constant.dart';
 
 class SignInModel {
-  final String? token;
-  final String? message;
+  final String accessToken;
+  final String refreshToken;
+  final String tokenType;
 
-  SignInModel({this.token, this.message});
+  SignInModel({
+    required this.accessToken,
+    required this.refreshToken,
+    required this.tokenType,
+  });
 
   factory SignInModel.fromJson(Map<String, dynamic> json) {
     return SignInModel(
-      token: json[ApiKey.access_token] as String? ?? '',
-      message:
-          (json[ApiKey.detail] as String?) ?? (json['detail'] as String?) ?? '',
+      accessToken: json[ApiKey.access_token] ?? '',
+      refreshToken: json[ApiKey.refresh_token] ?? '',
+      tokenType: json['token_type'] ?? '',
     );
   }
 }

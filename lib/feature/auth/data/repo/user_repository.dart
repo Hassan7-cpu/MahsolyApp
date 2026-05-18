@@ -33,15 +33,23 @@ class UserRepository {
       }
 
       final user = SignInModel.fromJson(data);
-      final token = user.token;
+      final token = user.accessToken;
 
-      if (token == null || token.isEmpty) {
+      if (token.isEmpty) {
         return Left("Invalid token");
       }
 
       final decoded = JwtDecoder.decode(token);
       final userId = decoded['sub']?.toString() ?? '';
-      await CacheHelper().saveData(key: ApiKey.access_token, value: token);
+      await CacheHelper().saveData(
+        key: ApiKey.access_token,
+        value: user.accessToken,
+      );
+
+      await CacheHelper().saveData(
+        key: ApiKey.refresh_token,
+        value: user.refreshToken,
+      );
 
       await CacheHelper().saveData(key: ApiKey.email, value: email);
 

@@ -18,6 +18,7 @@ class Endpoints {
   static String verifyForgotPasswordOtp = "auth/verify-reset-otp";
   static String resetPassword = "auth/reset-password";
   static String dashboard = "Dashboard";
+  static String refreshToken = "auth/refresh?";
 }
 
 //دي الحاجات الي في ال response
@@ -27,6 +28,7 @@ class ApiKey {
   static String otp = "otp";
   static String password = "password";
   static String access_token = "access_token";
+  static String refresh_token = "REFRESH_TOKEN";
   static String detail = "message";
   static String id = "id";
   static String message = "message";
