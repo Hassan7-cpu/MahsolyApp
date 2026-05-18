@@ -17,6 +17,7 @@ class Endpoints {
   static String forgotPassword = "auth/forgot-password";
   static String verifyForgotPasswordOtp = "auth/verify-reset-otp";
   static String resetPassword = "auth/reset-password";
+  static String dashboard = "Dashboard";
 }
 
 //دي الحاجات الي في ال response
