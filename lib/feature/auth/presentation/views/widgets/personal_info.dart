@@ -27,8 +27,15 @@ class _PersonalInfoCardState extends State<PersonalInfoCard> {
   @override
   void initState() {
     super.initState();
-    emailController.text = CacheHelper().getData(key: ApiKey.email) ?? '';
-    nameController.text = CacheHelper().getData(key: ApiKey.name) ?? '';
+    final email = CacheHelper().getData(key: ApiKey.email) ?? '';
+    emailController.text = email;
+    if (email.isNotEmpty) {
+      nameController.text = CacheHelper().getData(key: 'name_${email.trim()}') ??
+          CacheHelper().getData(key: ApiKey.name) ??
+          '';
+    } else {
+      nameController.text = CacheHelper().getData(key: ApiKey.name) ?? '';
+    }
   }
 
   @override

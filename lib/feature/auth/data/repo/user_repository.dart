@@ -46,10 +46,27 @@ class UserRepository {
       await CacheHelper().saveData(key: ApiKey.email, value: email);
 
       await CacheHelper().saveData(key: ApiKey.id, value: userId);
-      final userName =
-          decoded['name']?.toString() ?? decoded['username']?.toString() ?? '';
+      final userName = decoded['name']?.toString() ?? '';
       if (userName.isNotEmpty) {
         await CacheHelper().saveData(key: ApiKey.name, value: userName);
+        await CacheHelper().saveData(
+          key: 'name_${email.trim()}',
+          value: userName,
+        );
+      } else {
+        final cachedName = CacheHelper().getData(key: 'name_${email.trim()}');
+        if (cachedName != null &&
+            cachedName is String &&
+            cachedName.isNotEmpty) {
+          await CacheHelper().saveData(key: ApiKey.name, value: cachedName);
+        } else {
+          final defaultName = email.split('@')[0];
+          await CacheHelper().saveData(key: ApiKey.name, value: defaultName);
+          await CacheHelper().saveData(
+            key: 'name_${email.trim()}',
+            value: defaultName,
+          );
+        }
       }
 
       return Right(user);
@@ -75,7 +92,13 @@ class UserRepository {
         },
       );
       final signUPModel = SignUpModel.fromJson(response);
+
+      await CacheHelper().saveData(key: ApiKey.email, value: email);
+
       await CacheHelper().saveData(key: ApiKey.name, value: name);
+
+      await CacheHelper().saveData(key: 'name_${email.trim()}', value: name);
+
       return Right(signUPModel);
     } on ServerException catch (e) {
       return Left(e.errModel.errorMessage);

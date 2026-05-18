@@ -14,6 +14,9 @@ class Endpoints {
   static String predictCrop = "predict-crop";
   static String predictFertilizer = "fertilizer-recommendation";
   static String chat = "chatbot";
+  static String forgotPassword = "auth/forgot-password";
+  static String verifyForgotPasswordOtp = "auth/verify-reset-otp";
+  static String resetPassword = "auth/reset-password";
 }
 
 //دي الحاجات الي في ال response
@@ -36,4 +39,6 @@ class ApiKey {
   static String treatment = "treatment";
   static String prevention = "prevention";
   static String tips = "tips";
+  static String newPassword = "new_password";
+  static String confirmPassword = "confirm_password";
 }

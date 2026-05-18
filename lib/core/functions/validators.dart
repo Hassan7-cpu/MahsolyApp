@@ -22,6 +22,16 @@ class Validators {
     return null;
   }
 
+  static String? otpValidator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "OTP is required";
+    }
+    if (value.trim().length != 6) {
+      return "OTP must be exactly 6 digits";
+    }
+    return null;
+  }
+
   static String? confirmPasswordValidator(String? value, String password) {
     if (value == null || value.isEmpty) {
       return "Confirm password is required";

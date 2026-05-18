@@ -3,8 +3,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/theme/cubit/theme_state.dart';
 
+import 'package:save_plant/core/networking/api_constant.dart';
+
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit() : super(const ThemeInitial(ThemeMode.light));
+  ThemeCubit() : super(const ThemeInitial(ThemeMode.light)) {
+    _initializeTheme();
+  }
+
+  void _initializeTheme() {
+    final cachedEmail = CacheHelper().getData(key: ApiKey.email);
+
+    if (cachedEmail is! String || cachedEmail.trim().isEmpty) {
+      emit(const ThemeInitial(ThemeMode.light));
+      return;
+    }
+
+    email = cachedEmail.trim();
+
+    final savedTheme = CacheHelper().getData(key: 'theme_$email');
+
+    if (savedTheme is String) {
+      emit(ThemeInitial(_getThemeFromString(savedTheme)));
+    } else {
+      emit(const ThemeInitial(ThemeMode.light));
+    }
+  }
 
   static ThemeCubit get(BuildContext context) =>
       BlocProvider.of<ThemeCubit>(context);
@@ -42,9 +65,12 @@ class ThemeCubit extends Cubit<ThemeState> {
   }
 
   void changeTheme(ThemeMode themeMode) async {
+    if (email.isEmpty) {
+      emit(ThemeChanged(themeMode));
+      return;
+    }
     debugPrint("Saving ${themeMode.name} for User: $email");
     await CacheHelper().saveData(key: 'theme_$email', value: themeMode.name);
-
     emit(ThemeChanged(themeMode));
   }
 

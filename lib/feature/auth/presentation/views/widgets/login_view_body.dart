@@ -10,6 +10,7 @@ import 'package:save_plant/core/functions/validators.dart';
 import 'package:save_plant/core/theme/text_style.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_cubit.dart';
 import 'package:save_plant/feature/auth/presentation/cubit/user_state.dart';
+import 'package:save_plant/feature/auth/presentation/views/forget_password_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/signup_view.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_button_auth.dart';
 import 'package:save_plant/feature/auth/presentation/views/widgets/custom_textformfield.dart';
@@ -105,8 +106,27 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       suffixIcon: CupertinoIcons.eye,
                       obscureText: true,
                     ),
-
-                    SizedBox(height: 50.h),
+                    SizedBox(height: 3.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ForgetPasswordView(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Forgot Password?',
+                            style: AppTextStyle.giloryRegular16(context),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20.h),
                     CustomButtonAuth(
                       onPressed: login,
                       buttonText: 'Login',
