@@ -18,7 +18,7 @@ class Endpoints {
   static String verifyForgotPasswordOtp = "auth/verify-reset-otp";
   static String resetPassword = "auth/reset-password";
   static String dashboard = "Dashboard";
-  static String refreshToken = "auth/refresh?";
+  static String refreshToken = "auth/refresh";
 }
 
 //دي الحاجات الي في ال response
