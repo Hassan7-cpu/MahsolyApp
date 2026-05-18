@@ -7,17 +7,17 @@ class ApiInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final token = CacheHelper().getData(key: ApiKey.access_token);
 
-    // 🧠 list of endpoints that DON'T need a token
     final authEndpoints = [
       Endpoints.signIn,
       Endpoints.signUp,
       Endpoints.verifyOtp,
+      Endpoints.refreshToken,
     ];
 
-    // ✅ check if the current request is an auth request
-    final isAuthRequest = authEndpoints.any((endpoint) => options.path.contains(endpoint));
+    final isAuthRequest = authEndpoints.any(
+      (endpoint) => options.path.contains(endpoint),
+    );
 
-    // ✅ add token if it's not an auth request and token exists
     if (!isAuthRequest &&
         token != null &&
         token.toString().isNotEmpty &&

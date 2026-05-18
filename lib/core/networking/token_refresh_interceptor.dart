@@ -14,14 +14,18 @@ class TokenRefreshInterceptor extends QueuedInterceptor {
     ErrorInterceptorHandler handler,
   ) async {
     if (err.response?.statusCode == 401) {
+      // Prevent infinite refresh loop
+      if (err.requestOptions.path.contains(Endpoints.refreshToken)) {
+        return handler.next(err);
+      }
+
       final refreshToken = CacheHelper().getData(key: ApiKey.refresh_token);
 
       if (refreshToken != null && refreshToken.toString().isNotEmpty) {
         try {
           final refreshDio = Dio();
 
-          final String refreshUrl =
-              '${Endpoints.baseUrl}${Endpoints.refreshToken}';
+          final refreshUrl = '${Endpoints.baseUrl}${Endpoints.refreshToken}';
 
           debugPrint("Refreshing token using URL: $refreshUrl");
 
@@ -68,9 +72,18 @@ class TokenRefreshInterceptor extends QueuedInterceptor {
                 });
               }
 
-              final clonedResponse = await dio.fetch(requestOptions);
+              debugPrint("Retrying request...");
 
-              return handler.resolve(clonedResponse);
+              debugPrint("Retry path: ${requestOptions.path}");
+
+              final retryDio = Dio();
+              final retryResponse = await retryDio.fetch(requestOptions);
+
+              debugPrint("Retry status code: ${retryResponse.statusCode}");
+
+              debugPrint("Retry response data: ${retryResponse.data}");
+
+              return handler.resolve(retryResponse);
             }
           }
         } catch (e) {
@@ -87,7 +100,7 @@ class TokenRefreshInterceptor extends QueuedInterceptor {
       }
     }
 
-    return super.onError(err, handler);
+    return handler.next(err);
   }
 
   Future<void> _forceLogout() async {

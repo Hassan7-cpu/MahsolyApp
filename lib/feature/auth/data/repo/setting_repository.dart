@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:save_plant/core/cache/cache_helper.dart';
 import 'package:save_plant/core/errors/exceptions.dart';
 import 'package:save_plant/core/networking/api_constant.dart';
@@ -12,20 +11,23 @@ class SettingRepository {
 
   Future<Either<String, void>> changeEmail({required String newemail}) async {
     try {
-      final token = CacheHelper().getData(key: ApiKey.access_token);
-
-      await api.post(
+      final response = await api.post(
         Endpoints.ChangeEmail,
         data: {"new_email": newemail},
-        options: Options(headers: {"Authorization": "Bearer $token"}),
       );
+
+      print("Change email response: $response");
 
       await CacheHelper().saveData(key: ApiKey.email, value: newemail);
 
       return const Right(null);
     } on ServerException catch (e) {
+      print("Change email server exception: ${e.errModel.errorMessage}");
+
       return Left(e.errModel.errorMessage);
     } catch (e) {
+      print("Change email unexpected error: $e");
+
       return const Left("Unexpected error");
     }
   }
@@ -45,9 +47,7 @@ class SettingRepository {
         },
       );
 
-      if (response == null) {
-        return const Left("Unexpected error");
-      }
+      print("Change password response: $response");
 
       return const Right(null);
     } on ServerException catch (e) {

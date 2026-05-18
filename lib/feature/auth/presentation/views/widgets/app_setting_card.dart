@@ -31,7 +31,7 @@ class _AppSettingsCardState extends State<AppSettingsCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    isDark ? "Dark Mode" : "Light Mode",
+                    isDark ? "Dark Mode" : "Dark Mode",
                     style: AppTextStyle.giloryRegular16(context),
                   ),
                   Switch(
